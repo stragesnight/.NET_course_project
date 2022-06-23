@@ -3,8 +3,10 @@ using System.Windows.Input;
 
 namespace NET_course_project.ViewModel
 {
-    // Клас, що реалізує інтерфейс ICommand.
-    // Відповідальний за зберігання та виконання методів-команд.
+    /// <summary>
+    /// Клас, що реалізує інтерфейс ICommand.
+    /// Відповідальний за зберігання та виконання методів-команд.
+    /// </summary>
     public class RelayCommand : ICommand
     {
         public event EventHandler CanExecuteChanged

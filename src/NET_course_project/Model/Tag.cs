@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace NET_course_project.Model
 {
-    // Клас, що описує теги для справ.
+    /// <summary>
+    /// Клас, що описує теги для справ.
+    /// </summary>
     public class Tag
     {
         public int Id { get; set; }

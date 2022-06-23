@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace NET_course_project.ViewModel
 {
-    // Допоміжний клас, що описує об'єкт, спостерігаючий за змінами в своїх властивостях.
+    /// <summary>
+    /// Допоміжний клас, що описує об'єкт, спостерігаючий за змінами в своїх властивостях.
+    /// </summary>
     public abstract class Observable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

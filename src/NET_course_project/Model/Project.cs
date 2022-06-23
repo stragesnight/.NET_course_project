@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace NET_course_project.Model
 {
-    // Клас, що описує проект (групу справ).
+    /// <summary>
+    /// Клас, що описує проект (групу справ).
+    /// </summary>
     public class Project
     {
         public int Id { get; set; }

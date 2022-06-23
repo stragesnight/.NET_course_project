@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace NET_course_project.Model
 {
-    // Проміжний клас між справою та проектом. Реалізує зв'язок багато-до-багатьох.
+    /// <summary>
+    /// Проміжний клас між справою та проектом. Реалізує зв'язок багато-до-багатьох.
+    /// </summary>
     public class ToDo_Project
     {
         public int Id { get; set; }

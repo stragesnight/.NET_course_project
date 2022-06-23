@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace NET_course_project.Model
 {
-    // Клас, що описує конкретну справу
+    /// <summary>
+    /// Клас, що описує конкретну справу.
+    /// </summary>
     public class ToDo
     {
         public int Id { get; set; }
