@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using NET_course_project.Misc;
 
 namespace NET_course_project.Model
@@ -38,7 +39,7 @@ namespace NET_course_project.Model
 
         public Priority()
         {
-            ToDos = new List<ToDo>();
+            ToDos = new ObservableCollection<ToDo>();
         }
     }
 }

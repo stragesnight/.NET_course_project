@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using NET_course_project.Misc;
 
 namespace NET_course_project.Model
@@ -27,7 +28,7 @@ namespace NET_course_project.Model
 
         public Tag()
         {
-            ToDos_Tags = new List<ToDo_Tag>();
+            ToDos_Tags = new ObservableCollection<ToDo_Tag>();
         }
     }
 }
