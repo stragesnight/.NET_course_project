@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace NET_course_project.ViewModel
+namespace NET_course_project.Misc
 {
     /// <summary>
     /// Клас, що реалізує інтерфейс ICommand.

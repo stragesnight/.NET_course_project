@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace NET_course_project.ViewModel
+namespace NET_course_project.Misc
 {
     /// <summary>
     /// Допоміжний клас, що описує об'єкт, спостерігаючий за змінами в своїх властивостях.

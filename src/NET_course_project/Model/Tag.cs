@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NET_course_project.ViewModel;
+using NET_course_project.Misc;
 
 namespace NET_course_project.Model
 {
