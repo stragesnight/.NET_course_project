@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using NET_course_project.ViewModel;
 
 namespace NET_course_project.Model
 {
     /// <summary>
     /// Клас, що описує проект (групу справ).
     /// </summary>
-    public class Project
+    public class Project : Observable
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged("Title");
+            }
+        }
 
         public virtual ICollection<ToDo_Project> ToDos_Projects { get; set; }
 

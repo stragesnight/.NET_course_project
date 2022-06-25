@@ -1,16 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using NET_course_project.ViewModel;
 
 namespace NET_course_project.Model
 {
     /// <summary>
     /// Клас, що описує можливі значення пріоритетів для справ.
     /// </summary>
-    public class Priority
+    public class Priority : Observable
     {
         public int Id { get; set; }
-        public int NumPriority { get; set; }
-        public string Title { get; set; }
+
+        private int _numPriority;
+        public int NumPriority
+        {
+            get => _numPriority;
+            set
+            {
+                _numPriority = value;
+                OnPropertyChanged("NumPriority");
+            }
+        }
+
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged("Title");
+            }
+        }
 
         public virtual ICollection<ToDo> ToDos { get; set; }
 
