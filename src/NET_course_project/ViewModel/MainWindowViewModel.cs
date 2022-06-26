@@ -4,6 +4,7 @@ using System.Data.Entity;
 using NET_course_project.Misc;
 using NET_course_project.Model;
 using NET_course_project.Repository;
+using System.Collections.ObjectModel;
 
 namespace NET_course_project.ViewModel
 {
@@ -11,14 +12,14 @@ namespace NET_course_project.ViewModel
     {
         public ToDoListDbContext DbContext { get; private set; } = null;
 
-        private ToDo_Project _selectedToDo_Project = null;
-        public ToDo_Project SelectedToDo_Project
+        private ToDo _selectedToDo = null;
+        public ToDo SelectedToDo
         {
-            get => _selectedToDo_Project;
+            get => _selectedToDo;
             set
             {
-                _selectedToDo_Project = value;
-                OnPropertyChanged("SelectedToDo_Project");
+                _selectedToDo = value;
+                OnPropertyChanged("SelectedToDo");
             }
         }
 
@@ -32,6 +33,18 @@ namespace NET_course_project.ViewModel
                 OnPropertyChanged("SelectedProject");
             }
         }
+
+        public ObservableCollection<ToDo> Ongoing1DayToDos =>
+            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+                DbFunctions.DiffDays(DateTime.Now, x.DueTo) >= 0 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 1).ToList());
+
+        public ObservableCollection<ToDo> Ongoing3DayToDos =>
+            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+                DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 1 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 3).ToList());
+
+        public ObservableCollection<ToDo> Ongoing7DayToDos =>
+            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+                DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 3 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 7).ToList());
 
 
         private RelayCommand _addToDoCommand = null;
@@ -58,14 +71,15 @@ namespace NET_course_project.ViewModel
             int nToDos = DbContext.ToDos.Count();
             ToDo toDo = new ToDo {
                 Title = $"ToDoTitle{nToDos + 1}",
+                Description = $"ToDoDescription{nToDos + 1}",
                 DueTo = DateTime.Now,
+                PlannedCompletionTime = DateTime.Now,
                 PriorityId = 1,
-                Description = $"ToDoDescription{nToDos + 1}"
+                ProjectId = projectId,
+                Completed = false
             };
-            toDo = DbContext.ToDos.Add(toDo);
-            DbContext.SaveChanges();
 
-            SelectedToDo_Project = DbContext.ToDos_Projects.Add(new ToDo_Project { ToDoId = toDo.Id, ProjectId = projectId });
+            SelectedToDo = DbContext.ToDos.Add(toDo);
             DbContext.SaveChanges();
         }
 

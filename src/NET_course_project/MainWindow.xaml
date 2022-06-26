@@ -9,6 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
@@ -22,26 +23,28 @@
                      HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="16px">
-                            <TextBlock Text="{Binding Path=Title}" FontSize="12px"/>
-                            <StackPanel>
-                                <ListBox ItemsSource="{Binding Path=ToDos_Projects}"
-                                         SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo_Project}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Margin="4px">
-                                                <TextBlock Text="{Binding Path=ToDo.Title}"/>
-                                                <TextBlock Text="{Binding Path=ToDo.Priority.Title}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <Button HorizontalAlignment="Center" Width="128px" Height="24px"
-                                        Content="Add new to-do..."
-                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddToDoCommand}"
-                                        CommandParameter="{Binding Path=Id}"/>
+                        <Border Margin="4px" BorderBrush="Black" BorderThickness="2px">
+                            <StackPanel Margin="4px">
+                                <TextBlock Text="{Binding Path=Title}" FontSize="12px"/>
+                                <StackPanel>
+                                    <ListBox ItemsSource="{Binding Path=ToDos}"
+                                         SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="4px">
+                                                    <TextBlock Text="{Binding Path=Title}"/>
+                                                    <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <Button HorizontalAlignment="Center" Width="128px" Height="24px"
+                                            Content="Add new to-do..."
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddToDoCommand}"
+                                            CommandParameter="{Binding Path=Id}"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -50,10 +53,72 @@
                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddProjectCommand}"/>
         </Grid>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="{Binding Path=SelectedToDo_Project.ToDo.Title}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo_Project.ToDo.Description}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo_Project.ToDo.DueTo}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo_Project.ToDo.Priority.Title}"/>
+            <TextBlock Text="{Binding Path=SelectedToDo.Title}"/>
+            <TextBlock Text="{Binding Path=SelectedToDo.Description}"/>
+            <TextBlock Text="{Binding Path=SelectedToDo.DueTo}"/>
+            <TextBlock Text="{Binding Path=SelectedToDo.Priority.Title}"/>
         </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32px"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="To-Do's by due date:"
+                       TextAlignment="Center" VerticalAlignment="Center"/>
+            <ListBox Grid.Row="1" Grid.Column="0">
+                <ListBoxItem>
+                    <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
+                        <StackPanel Margin="4px">
+                            <TextBlock Text="Due today:" FontSize="12px"/>
+                            <ListBox ItemsSource="{Binding Path=Ongoing1DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
+                        <StackPanel Margin="4px">
+                            <TextBlock Text="Due in 3 days:" FontSize="12px"/>
+                            <ListBox ItemsSource="{Binding Path=Ongoing3DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
+                        <StackPanel Margin="4px">
+                            <TextBlock Text="Due in a week:" FontSize="12px"/>
+                            <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Path=Title}"/>
+                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </ListBoxItem>
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>
