@@ -23,11 +23,11 @@ namespace NET_course_project.Model
             }
         }
 
-        public virtual ICollection<ToDo_Project> ToDos_Projects { get; set; }
+        public virtual ICollection<ToDo> ToDos { get; set; }
 
         public Project()
         {
-            ToDos_Projects = new ObservableCollection<ToDo_Project>();
+            ToDos = new ObservableCollection<ToDo>();
         }
     }
 }

@@ -85,7 +85,6 @@
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\ToDo.cs" />
-    <Compile Include="Model\ToDo_Project.cs" />
     <Compile Include="Model\ToDo_Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

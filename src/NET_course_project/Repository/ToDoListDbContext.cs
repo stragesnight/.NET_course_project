@@ -15,7 +15,6 @@ namespace NET_course_project.Repository
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ToDo_Tag> ToDos_Tags { get; set; }
-        public DbSet<ToDo_Project> ToDos_Projects { get; set; }
 
 
         // тимчасова заглушка ініціалізатора

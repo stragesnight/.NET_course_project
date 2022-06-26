@@ -23,6 +23,17 @@ namespace NET_course_project.Model
             }
         }
 
+        private int _projectId;
+        public int ProjectId
+        {
+            get => _projectId;
+            set
+            {
+                _projectId = value;
+                OnPropertyChanged("ProjectId");
+            }
+        }
+
         private DateTime _dueTo;
         public DateTime DueTo
         {
@@ -31,6 +42,17 @@ namespace NET_course_project.Model
             {
                 _dueTo = value;
                 OnPropertyChanged("DueTo");
+            }
+        }
+
+        private DateTime _plannedCompletionTime;
+        public DateTime PlannedCompletionTime
+        {
+            get => _plannedCompletionTime;
+            set
+            {
+                _plannedCompletionTime = value;
+                OnPropertyChanged("PlannedCompletionTime");
             }
         }
 
@@ -56,15 +78,24 @@ namespace NET_course_project.Model
             }
         }
 
+        private bool _completed;
+        public bool Completed
+        {
+            get => _completed;
+            set
+            {
+                _completed = value;
+                OnPropertyChanged("Completed");
+            }
+        }
         public virtual Priority Priority { get; set; }
+        public virtual Project Project { get; set; }
         public virtual ICollection<ToDo_Tag> ToDos_Tags { get; set; }
-        public virtual ICollection<ToDo_Project> ToDos_Projects { get; set; }
 
 
         public ToDo()
         {
             ToDos_Tags = new ObservableCollection<ToDo_Tag>();
-            ToDos_Projects = new ObservableCollection<ToDo_Project>();
         }
     }
 }

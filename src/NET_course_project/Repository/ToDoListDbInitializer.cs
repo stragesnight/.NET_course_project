@@ -38,30 +38,20 @@ namespace NET_course_project.Repository
 
         private void AddTestToDos(ToDoListDbContext context)
         {
-            int pCount = context.Priorities.Count();
+            int nPriorities = context.Priorities.Count();
+            int nProjs = context.Projects.Count();
+
             for (int i = 1; i <= _nEntries; ++i)
             {
                 context.ToDos.Add(new ToDo {
                     DueTo = DateTime.Today,
+                    PlannedCompletionTime = DateTime.Today,
                     Title = $"ToDoTitle{i}",
                     Description = $"ToDoDescription{i}",
-                    PriorityId = (i % pCount) + 1
+                    PriorityId = (i % nPriorities) + 1,
+                    ProjectId = ((i / 2) % nProjs) + 1,
+                    Completed = false
                 });
-            }
-
-            context.SaveChanges();
-        }
-
-        private void AddTestToDos_Projects(ToDoListDbContext context)
-        {
-            int nToDos = context.ToDos.Count();
-            int nProjs = context.Projects.Count();
-
-            int j = 1;
-            for (int i = 1; i <= nProjs; ++i)
-            {
-                for (int x = 0; x < 2; ++x, ++j)
-                    context.ToDos_Projects.Add(new ToDo_Project { ToDoId = j, ProjectId = i });
             }
 
             context.SaveChanges();
@@ -84,15 +74,11 @@ namespace NET_course_project.Repository
         protected override void Seed(ToDoListDbContext context)
         {
 #if DEBUG
-            if (context.ToDos.Count() < 1)
-            {
-                AddTestTags(context);
-                AddTestPriorities(context);
-                AddTestToDos(context);
-                AddTestProjects(context);
-                AddTestToDos_Projects(context);
-                AddTestToDos_Tags(context);
-            }
+            AddTestTags(context);
+            AddTestPriorities(context);
+            AddTestProjects(context);
+            AddTestToDos(context);
+            AddTestToDos_Tags(context);
 #endif
             base.Seed(context);
         }
