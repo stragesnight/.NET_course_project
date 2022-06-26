@@ -68,27 +68,19 @@ namespace NET_course_project.ViewModel
             if (project == null)
                 return;
 
-            int nToDos = DbContext.ToDos.Count();
-            ToDo toDo = new ToDo {
-                Title = $"ToDoTitle{nToDos + 1}",
-                Description = $"ToDoDescription{nToDos + 1}",
-                DueTo = DateTime.Now,
-                PlannedCompletionTime = DateTime.Now,
-                PriorityId = 1,
-                ProjectId = projectId,
-                Completed = false
-            };
-
-            SelectedToDo = DbContext.ToDos.Add(toDo);
-            DbContext.SaveChanges();
+            DialogService.ShowDialog("AddToDo", result => { });
         }
 
         private void HandleAddProject()
         {
             int nProjects = DbContext.Projects.Count();
-            Project project = new Project { Title = $"Project{nProjects + 1}" };
-            SelectedProject = DbContext.Projects.Add(project);
-            DbContext.SaveChanges();
+            DialogService.ShowDialog("AddProjectDialog", result => {
+                if (!(result is Project))
+                    return;
+
+                SelectedProject = DbContext.Projects.Add(result as Project);
+                DbContext.SaveChanges();
+            });
         }
     }
 }

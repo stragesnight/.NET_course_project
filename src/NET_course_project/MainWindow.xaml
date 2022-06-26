@@ -20,7 +20,8 @@
             <ListBox Grid.Row="0" Grid.Column="0"
                      ItemsSource="{Binding Path=DbContext.Projects.Local}"
                      SelectedItem="{Binding Path=SelectedProject}"
-                     HorizontalContentAlignment="Stretch">
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.CanContentScroll="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Margin="4px" BorderBrush="Black" BorderThickness="2px">
@@ -28,7 +29,8 @@
                                 <TextBlock Text="{Binding Path=Title}" FontSize="12px"/>
                                 <StackPanel>
                                     <ListBox ItemsSource="{Binding Path=ToDos}"
-                                         SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo}">
+                                             SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo}"
+                                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Margin="4px">
@@ -66,7 +68,9 @@
             <TextBlock Grid.Row="0" Grid.Column="0"
                        Text="To-Do's by due date:"
                        TextAlignment="Center" VerticalAlignment="Center"/>
-            <ListBox Grid.Row="1" Grid.Column="0">
+            <ListBox Grid.Row="1" Grid.Column="0"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.CanContentScroll="False">
                 <ListBoxItem>
                     <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
                         <StackPanel Margin="4px">

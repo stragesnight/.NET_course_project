@@ -62,11 +62,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Misc\DialogService.cs" />
     <Compile Include="Repository\ToDoListDbContext.cs" />
     <Compile Include="Repository\ToDoListDbInitializer.cs" />
     <Compile Include="Misc\Observable.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\AddProjectDialog.xaml.cs">
+      <DependentUpon>AddProjectDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddToDo.xaml.cs">
+      <DependentUpon>AddToDo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BaseDialogWindow.xaml.cs">
+      <DependentUpon>BaseDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +89,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddToDo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BaseDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Priority.cs" />
