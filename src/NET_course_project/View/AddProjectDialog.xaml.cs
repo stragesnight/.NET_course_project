@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using NET_course_project.Model;
+using NET_course_project.ViewModel;
 
 namespace NET_course_project.View
 {
@@ -9,23 +9,13 @@ namespace NET_course_project.View
     /// </summary>
     public partial class AddProjectDialog : UserControl
     {
-        public AddProjectDialog()
+        public AddProjectDialog(object _)
         {
             InitializeComponent();
+            this.DataContext = new AddProjectDialogViewModel();
         }
 
-        private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            Window parent = this.Parent as Window;
-            parent.Tag = new Project { Title = projectNameTextBox.Text };
-            parent.Close();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Window parent = this.Parent as Window;
-            parent.Tag = null;
-            parent.Close();
-        }
+        public void CloseWindow(object sender = null, RoutedEventArgs e = null)
+            => (this.Parent as Window).Close();
     }
 }

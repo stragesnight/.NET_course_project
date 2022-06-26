@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -63,20 +66,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Misc\DialogService.cs" />
+    <Compile Include="Misc\IndexToIdConverter.cs" />
+    <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Repository\ToDoListDbContext.cs" />
     <Compile Include="Repository\ToDoListDbInitializer.cs" />
     <Compile Include="Misc\Observable.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
+    <Compile Include="ViewModel\AddProjectDialogViewModel.cs" />
+    <Compile Include="ViewModel\AddToDoDialogViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\AddProjectDialog.xaml.cs">
       <DependentUpon>AddProjectDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddToDo.xaml.cs">
-      <DependentUpon>AddToDo.xaml</DependentUpon>
+    <Compile Include="View\AddToDoDialog.xaml.cs">
+      <DependentUpon>AddToDoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BaseDialogWindow.xaml.cs">
       <DependentUpon>BaseDialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\IDialog.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,7 +101,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddToDo.xaml">
+    <Page Include="View\AddToDoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

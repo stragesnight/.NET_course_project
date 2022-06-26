@@ -41,5 +41,7 @@ namespace NET_course_project.Model
         {
             ToDos = new ObservableCollection<ToDo>();
         }
+
+        public override string ToString() => Title;
     }
 }

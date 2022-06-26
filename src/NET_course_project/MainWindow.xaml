@@ -52,7 +52,7 @@
             </ListBox>
             <Button Grid.Row="1" Grid.Column="0" Height="32px"
                     Content="Add new project..."
-                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddProjectCommand}"/>
+                    Command="{Binding Path=AddProjectCommand}"/>
         </Grid>
         <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock Text="{Binding Path=SelectedToDo.Title}"/>

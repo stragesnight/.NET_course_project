@@ -45,7 +45,6 @@ namespace NET_course_project.Repository
             {
                 context.ToDos.Add(new ToDo {
                     DueTo = DateTime.Today,
-                    PlannedCompletionTime = DateTime.Today,
                     Title = $"ToDoTitle{i}",
                     Description = $"ToDoDescription{i}",
                     PriorityId = (i % nPriorities) + 1,

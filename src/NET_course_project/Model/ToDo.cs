@@ -45,17 +45,6 @@ namespace NET_course_project.Model
             }
         }
 
-        private DateTime _plannedCompletionTime;
-        public DateTime PlannedCompletionTime
-        {
-            get => _plannedCompletionTime;
-            set
-            {
-                _plannedCompletionTime = value;
-                OnPropertyChanged("PlannedCompletionTime");
-            }
-        }
-
         private string _title;
         public string Title
         {

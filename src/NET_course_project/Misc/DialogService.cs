@@ -6,13 +6,15 @@ namespace NET_course_project.Misc
 {
     public static class DialogService
     {
-        public static void ShowDialog(string dialogName, Action<object> callback)
+        public static void ShowDialog(string dialogName, object state, Action<object> callback = null)
         {
             try
             {
                 BaseDialogWindow dialogWindow = new BaseDialogWindow();
                 Type type = Type.GetType($"NET_course_project.View.{dialogName}");
-                FrameworkElement content = Activator.CreateInstance(type) as FrameworkElement;
+                FrameworkElement content = Activator.CreateInstance(type, state) as FrameworkElement;
+                if (!(content.DataContext is IDialog))
+                    throw new Exception("Dialog view model class must implement IDialog interface");
 
                 dialogWindow.Content = content;
                 dialogWindow.Width = content.Width;
@@ -21,7 +23,7 @@ namespace NET_course_project.Misc
 
                 EventHandler closeHandler = null;
                 closeHandler = (s, e) => {
-                    callback?.Invoke(dialogWindow.Tag);
+                    callback?.Invoke((content.DataContext as IDialog).ResultState);
                     dialogWindow.Closed -= closeHandler;
                 };
                 dialogWindow.Closed += closeHandler;

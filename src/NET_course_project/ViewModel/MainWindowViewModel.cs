@@ -10,7 +10,7 @@ namespace NET_course_project.ViewModel
 {
     public class MainWindowViewModel : Observable
     {
-        public ToDoListDbContext DbContext { get; private set; } = null;
+        public ToDoListDbContext DbContext => DbRepository.DbContext;
 
         private ToDo _selectedToDo = null;
         public ToDo SelectedToDo
@@ -35,15 +35,15 @@ namespace NET_course_project.ViewModel
         }
 
         public ObservableCollection<ToDo> Ongoing1DayToDos =>
-            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+            new ObservableCollection<ToDo>(DbRepository.DbContext.ToDos.Where(x =>
                 DbFunctions.DiffDays(DateTime.Now, x.DueTo) >= 0 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 1).ToList());
 
         public ObservableCollection<ToDo> Ongoing3DayToDos =>
-            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+            new ObservableCollection<ToDo>(DbRepository.DbContext.ToDos.Where(x =>
                 DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 1 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 3).ToList());
 
         public ObservableCollection<ToDo> Ongoing7DayToDos =>
-            new ObservableCollection<ToDo>(DbContext.ToDos.Where(x =>
+            new ObservableCollection<ToDo>(DbRepository.DbContext.ToDos.Where(x =>
                 DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 3 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 7).ToList());
 
 
@@ -56,30 +56,23 @@ namespace NET_course_project.ViewModel
             (_addProjectCommand = new RelayCommand(x => HandleAddProject()));
 
         public MainWindowViewModel()
-        {
-            DbContext = new ToDoListDbContext();
-            DbContext.ToDos.Load();
-            DbContext.Projects.Load();
-        }
+        { }
 
         private void HandleAddToDo(int projectId)
         {
-            Project project = DbContext.Projects.FirstOrDefault(x => x.Id == projectId);
+            Project project = DbRepository.DbContext.Projects.FirstOrDefault(x => x.Id == projectId);
             if (project == null)
                 return;
 
-            DialogService.ShowDialog("AddToDo", result => { });
+            DialogService.ShowDialog("AddToDoDialog", projectId, result => {
+                SelectedToDo = result as ToDo;
+            });
         }
 
         private void HandleAddProject()
         {
-            int nProjects = DbContext.Projects.Count();
-            DialogService.ShowDialog("AddProjectDialog", result => {
-                if (!(result is Project))
-                    return;
-
-                SelectedProject = DbContext.Projects.Add(result as Project);
-                DbContext.SaveChanges();
+            DialogService.ShowDialog("AddProjectDialog", null, result => {
+                SelectedProject = result as Project;
             });
         }
     }
