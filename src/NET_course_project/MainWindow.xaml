@@ -100,7 +100,6 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </DatePicker>
-                <TextBlock Text="{Binding Path=SelectedToDo.Priority.Title}"/>
                 <TextBlock Text="Priority:"/>
                 <ComboBox ItemsSource="{Binding Path=DbContext.Priorities.Local}"
                           SelectedItem="{Binding Path=SelectedToDo.Priority}">
@@ -110,6 +109,23 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
+                <TextBlock Text="Tags:"/>
+                <ListBox ItemsSource="{Binding SelectedToDo.ToDos_Tags}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Tag.Title}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Width="64px" HorizontalAlignment="Left"
+                        Content="Add tag" 
+                        Command="{Binding Path=AddTagCommand}"
+                        CommandParameter="{Binding Path=SelectedToDo.Id}"/>
                 <TextBlock Text="In project:"/>
                 <ComboBox ItemsSource="{Binding Path=DbContext.Projects.Local}"
                           SelectedItem="{Binding Path=SelectedToDo.Project, Mode=TwoWay}">

@@ -83,6 +83,10 @@ namespace NET_course_project.ViewModel
         public RelayCommand SaveChangesCommand => _saveChangesCommand ??
             (_saveChangesCommand = new RelayCommand(x => HandleSaveChanges()));
 
+        private RelayCommand _addTagCommand = null;
+        public RelayCommand AddTagCommand => _addTagCommand ??
+            (_addTagCommand = new RelayCommand(x => HandleAddTag((int)x)));
+
         public MainWindowViewModel()
         {
             RecalculateOngoingToDos();
@@ -91,10 +95,6 @@ namespace NET_course_project.ViewModel
 
         private void HandleAddToDo(int projectId)
         {
-            Project project = DbRepository.DbContext.Projects.FirstOrDefault(x => x.Id == projectId);
-            if (project == null)
-                return;
-
             DialogService.ShowDialog("AddToDoDialog", projectId, result => {
                 SelectedToDo = result as ToDo;
             });
@@ -110,6 +110,13 @@ namespace NET_course_project.ViewModel
         private void HandleSaveChanges()
         {
             DbRepository.SaveChanges();
+        }
+
+        private void HandleAddTag(int toDoId)
+        {
+            DialogService.ShowDialog("AddTagDialog", toDoId, result => {
+                HandleSaveChanges();
+            });
         }
 
         private void RecalculateOngoingToDos()

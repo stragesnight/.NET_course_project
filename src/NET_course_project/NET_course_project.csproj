@@ -73,10 +73,14 @@
     <Compile Include="Misc\Observable.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
     <Compile Include="ViewModel\AddProjectDialogViewModel.cs" />
+    <Compile Include="ViewModel\AddTagDialogViewModel.cs" />
     <Compile Include="ViewModel\AddToDoDialogViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\AddProjectDialog.xaml.cs">
       <DependentUpon>AddProjectDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddTagDialog.xaml.cs">
+      <DependentUpon>AddTagDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddToDoDialog.xaml.cs">
       <DependentUpon>AddToDoDialog.xaml</DependentUpon>
@@ -98,6 +102,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AddProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddTagDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
