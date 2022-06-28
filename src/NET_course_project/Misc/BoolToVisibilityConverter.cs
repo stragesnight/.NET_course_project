@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Data;
+using System.Globalization;
+using System.Windows;
 
 namespace NET_course_project.Misc
 {
-    class IndexToIdConverter : IValueConverter
+    class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)value - 1;
+            return (bool)value ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)value + 1;
+            return (Visibility)value == Visibility.Visible;
         }
     }
 }

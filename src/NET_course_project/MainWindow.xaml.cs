@@ -14,5 +14,10 @@ namespace NET_course_project
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
         }
+
+        private void SelectParent(object sender, RoutedEventArgs e)
+        {
+            ((sender as FrameworkElement).Parent as FrameworkElement).Focus();
+        }
     }
 }

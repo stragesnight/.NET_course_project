@@ -65,8 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Misc\BoolToVisibilityConverter.cs" />
     <Compile Include="Misc\DialogService.cs" />
-    <Compile Include="Misc\IndexToIdConverter.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Repository\ToDoListDbContext.cs" />
     <Compile Include="Repository\ToDoListDbInitializer.cs" />

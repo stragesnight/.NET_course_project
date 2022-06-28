@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NET_course_project"
+        xmlns:misc="clr-namespace:NET_course_project.Misc"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="To-Do List" Height="450" Width="800">
+    <Window.Resources>
+        <misc:BoolToVisibilityConverter x:Key="visibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -30,6 +35,7 @@
                                 <StackPanel>
                                     <ListBox ItemsSource="{Binding Path=ToDos}"
                                              SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo}"
+                                             SelectionChanged="SelectParent"
                                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
@@ -43,7 +49,8 @@
                                     <Button HorizontalAlignment="Center" Width="128px" Height="24px"
                                             Content="Add new to-do..."
                                             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddToDoCommand}"
-                                            CommandParameter="{Binding Path=Id}"/>
+                                            CommandParameter="{Binding Path=Id}"
+                                            MouseDown="SelectParent"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -54,12 +61,66 @@
                     Content="Add new project..."
                     Command="{Binding Path=AddProjectCommand}"/>
         </Grid>
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="{Binding Path=SelectedToDo.Title}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo.Description}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo.DueTo}"/>
-            <TextBlock Text="{Binding Path=SelectedToDo.Priority.Title}"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1"
+              Visibility="{Binding Path=IsSomeToDoSelected, Converter={StaticResource visibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <TextBlock Text="Title:"/>
+                <TextBox Text="{Binding Path=SelectedToDo.Title, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <CheckBox Content="Completed" IsChecked="{Binding Path=SelectedToDo.Completed, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+                <TextBlock Text="Description:"/>
+                <TextBox Text="{Binding Path=SelectedToDo.Description, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBlock Text="Due to:"/>
+                <DatePicker SelectedDate="{Binding Path=SelectedToDo.DueTo, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
+                <TextBlock Text="{Binding Path=SelectedToDo.Priority.Title}"/>
+                <TextBlock Text="Priority:"/>
+                <ComboBox ItemsSource="{Binding Path=DbContext.Priorities.Local}"
+                          SelectedItem="{Binding Path=SelectedToDo.Priority}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <TextBlock Text="In project:"/>
+                <ComboBox ItemsSource="{Binding Path=DbContext.Projects.Local}"
+                          SelectedItem="{Binding Path=SelectedToDo.Project, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=SaveChangesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
         <Grid Grid.Row="0" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="32px"/>
@@ -75,7 +136,8 @@
                     <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due today:" FontSize="12px"/>
-                            <ListBox ItemsSource="{Binding Path=Ongoing1DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                            <ListBox ItemsSource="{Binding Path=Ongoing1DayToDos}"
+                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -92,7 +154,8 @@
                     <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due in 3 days:" FontSize="12px"/>
-                            <ListBox ItemsSource="{Binding Path=Ongoing3DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                            <ListBox ItemsSource="{Binding Path=Ongoing3DayToDos}"
+                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -109,7 +172,8 @@
                     <Border BorderThickness="2px" BorderBrush="Black" Margin="4px">
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due in a week:" FontSize="12px"/>
-                            <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}" SelectedItem="{Binding Path=SelectedToDo}">
+                            <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}"
+                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>

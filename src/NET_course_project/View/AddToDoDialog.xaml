@@ -5,13 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:NET_course_project.View"
-             xmlns:misc="clr-namespace:NET_course_project.Misc"
              mc:Ignorable="d" 
              Height="400" Width="500"
              x:Name="Add_to_do">
-    <UserControl.Resources>
-        <misc:IndexToIdConverter x:Key="indexConverter"/>
-    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height=".8*"/>
@@ -34,7 +30,7 @@
             <TextBox x:Name="toDoDescription" Text="{Binding Path=CreatedToDo.Description}"/>
             <TextBlock Margin="4px 8px" Text="Priority:"/>
             <ComboBox x:Name="priorityComboBox"
-                      SelectedIndex="{Binding Path=CreatedToDo.PriorityId, Mode=TwoWay, Converter={StaticResource indexConverter}}"
+                      SelectedItem="{Binding Path=CreatedToDo.Priority, Mode=TwoWay}"
                       ItemsSource="{Binding Path=DbContext.Priorities.Local}"/>
             <TextBlock Margin="4px 8px" Text="Due to:"/>
             <DatePicker x:Name="dueToDatePicker" SelectedDate="{Binding Path=CreatedToDo.DueTo}"/>

@@ -6,6 +6,7 @@ namespace NET_course_project.Repository
 {
     public static class DbRepository
     {
+        public static event Action ChangesSaved;
         public static ToDoListDbContext DbContext { get; private set; } = null;
 
 
@@ -21,6 +22,7 @@ namespace NET_course_project.Repository
         {
             ToDo tmp = DbContext.ToDos.Add(toAdd);
             DbContext.SaveChanges();
+            ChangesSaved?.Invoke();
             return tmp;
         }
 
@@ -28,7 +30,14 @@ namespace NET_course_project.Repository
         {
             Project tmp = DbContext.Projects.Add(toAdd);
             DbContext.SaveChanges();
+            ChangesSaved?.Invoke();
             return tmp;
+        }
+
+        public static void SaveChanges()
+        {
+            DbContext.SaveChanges();
+            ChangesSaved?.Invoke();
         }
     }
 }

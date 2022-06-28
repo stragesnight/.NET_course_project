@@ -77,8 +77,20 @@ namespace NET_course_project.Model
                 OnPropertyChanged("Completed");
             }
         }
-        public virtual Priority Priority { get; set; }
+
+        private Priority _priority = null;
+        public virtual Priority Priority
+        {
+            get => _priority;
+            set
+            {
+                _priority = value;
+                OnPropertyChanged("Priority");
+            }
+        }
+
         public virtual Project Project { get; set; }
+
         public virtual ICollection<ToDo_Tag> ToDos_Tags { get; set; }
 
 
