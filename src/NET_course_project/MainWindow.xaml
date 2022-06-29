@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
             <ListBox Grid.Row="0" Grid.Column="0"
                      ItemsSource="{Binding Path=DbContext.Projects.Local}"
-                     SelectedItem="{Binding Path=SelectedProject}"
+                     SelectedValue="{Binding Path=SelectedProject}"
                      HorizontalContentAlignment="Stretch"
                      ScrollViewer.CanContentScroll="False">
                 <ListBox.ItemTemplate>
@@ -47,7 +47,7 @@
                                 </TextBlock>
                                 <StackPanel>
                                     <ListBox ItemsSource="{Binding Path=ToDos}"
-                                             SelectedItem="{Binding Source={StaticResource viewModel},  Path=SelectedToDo}"
+                                             SelectedValue="{Binding Source={StaticResource viewModel}, Path=SelectedToDo, Mode=TwoWay, FallbackValue=-1}"
                                              SelectionChanged="SelectParent"
                                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                              HorizontalContentAlignment="Stretch">
@@ -174,7 +174,7 @@
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due today:" FontSize="12px"/>
                             <ListBox ItemsSource="{Binding Path=Ongoing1DayToDos}"
-                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
+                                     SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -192,7 +192,7 @@
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due in 3 days:" FontSize="12px"/>
                             <ListBox ItemsSource="{Binding Path=Ongoing3DayToDos}"
-                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
+                                     SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -210,7 +210,7 @@
                         <StackPanel Margin="4px">
                             <TextBlock Text="Due in a week:" FontSize="12px"/>
                             <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}"
-                                     SelectedItem="{Binding Path=SelectedToDo, Mode=OneWay}">
+                                     SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
