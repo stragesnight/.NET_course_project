@@ -45,7 +45,7 @@ namespace NET_course_project.ViewModel
             Tag tag = DbRepository.DbContext.Tags.FirstOrDefault(x => x.Title == _createdTag.Title);
             _createdTag = tag == null ? DbRepository.AddTag(_createdTag) : tag;
 
-            DbRepository.DbContext.ToDos_Tags.Add(new ToDo_Tag {
+            DbRepository.AddToDo_Tag(new ToDo_Tag {
                 ToDoId = _toDoId,
                 TagId = _createdTag.Id
             });

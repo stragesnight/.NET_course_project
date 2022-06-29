@@ -30,14 +30,14 @@ namespace NET_course_project.ViewModel
 
         private RelayCommand _addToDoCommand = null;
         public RelayCommand AddToDoCommand => _addToDoCommand ??
-            (_addToDoCommand = new RelayCommand(x => DbRepository.AddToDo(CreatedToDo)));
+            (_addToDoCommand = new RelayCommand(x => CreatedToDo = DbRepository.AddToDo(CreatedToDo)));
 
 
         public AddToDoDialogViewModel(int projectId)
         {
-            _toDo = new ToDo();
-            _toDo.ProjectId = projectId;
-            _toDo.DueTo = DateTime.Now;
+            CreatedToDo = new ToDo();
+            CreatedToDo.ProjectId = projectId;
+            CreatedToDo.DueTo = DateTime.Now;
         }
     }
 }

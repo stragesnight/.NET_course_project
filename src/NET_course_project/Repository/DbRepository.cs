@@ -13,40 +13,50 @@ namespace NET_course_project.Repository
         static DbRepository()
         {
             DbContext = new ToDoListDbContext();
-            DbContext.ToDos.Load();
-            DbContext.Projects.Load();
-            DbContext.Priorities.Load();
-            DbContext.Tags.Load();
+            ReloadLocal();
         }
 
         public static ToDo AddToDo(ToDo toAdd)
         {
             ToDo tmp = DbContext.ToDos.Add(toAdd);
-            DbContext.SaveChanges();
-            ChangesSaved?.Invoke();
+            SaveChanges();
             return tmp;
         }
 
         public static Project AddProject(Project toAdd)
         {
             Project tmp = DbContext.Projects.Add(toAdd);
-            DbContext.SaveChanges();
-            ChangesSaved?.Invoke();
+            SaveChanges();
             return tmp;
         }
 
         public static Tag AddTag(Tag toAdd)
         {
             Tag tmp = DbContext.Tags.Add(toAdd);
-            DbContext.SaveChanges();
-            ChangesSaved?.Invoke();
+            SaveChanges();
+            return tmp;
+        }
+
+        public static ToDo_Tag AddToDo_Tag(ToDo_Tag toAdd)
+        {
+            ToDo_Tag tmp = DbContext.ToDos_Tags.Add(toAdd);
+            SaveChanges();
             return tmp;
         }
 
         public static void SaveChanges()
         {
             DbContext.SaveChanges();
+            //ReloadLocal();
             ChangesSaved?.Invoke();
+        }
+
+        public static void ReloadLocal()
+        {
+            DbContext.ToDos.Load();
+            DbContext.Projects.Load();
+            DbContext.Priorities.Load();
+            DbContext.Tags.Load();
         }
     }
 }

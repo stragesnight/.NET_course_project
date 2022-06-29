@@ -103,9 +103,7 @@ namespace NET_course_project.ViewModel
 
         private void HandleAddToDo(int projectId)
         {
-            DialogService.ShowDialog("AddToDoDialog", projectId, result => {
-                SelectedToDo = result as ToDo;
-            });
+            DialogService.ShowDialog("AddToDoDialog", projectId);
         }
 
         private void HandleRemoveToDo(int toDoId)
@@ -120,9 +118,7 @@ namespace NET_course_project.ViewModel
 
         private void HandleAddProject()
         {
-            DialogService.ShowDialog("AddProjectDialog", null, result => {
-                SelectedProject = result as Project;
-            });
+            DialogService.ShowDialog("AddProjectDialog", null);
         }
 
         private void HandleRemoveProject(int projectId)
