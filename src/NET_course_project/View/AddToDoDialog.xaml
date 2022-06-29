@@ -31,6 +31,7 @@
             <TextBlock Margin="4px 8px" Text="Priority:"/>
             <ComboBox x:Name="priorityComboBox"
                       SelectedItem="{Binding Path=CreatedToDo.Priority, Mode=TwoWay}"
+                      SelectedIndex="0"
                       ItemsSource="{Binding Path=DbContext.Priorities.Local}"/>
             <TextBlock Margin="4px 8px" Text="Due to:"/>
             <DatePicker x:Name="dueToDatePicker" SelectedDate="{Binding Path=CreatedToDo.DueTo}"/>
