@@ -75,9 +75,17 @@ namespace NET_course_project.ViewModel
         public RelayCommand AddToDoCommand => _addToDoCommand ??
             (_addToDoCommand = new RelayCommand(x => HandleAddToDo((int)x)));
 
+        private RelayCommand _removeToDoCommand = null;
+        public RelayCommand RemoveToDoCommand => _removeToDoCommand ??
+            (_removeToDoCommand = new RelayCommand(x => HandleRemoveToDo((int)x)));
+
         private RelayCommand _addProjectCommand = null;
         public RelayCommand AddProjectCommand => _addProjectCommand ??
             (_addProjectCommand = new RelayCommand(x => HandleAddProject()));
+
+        private RelayCommand _removeProjectCommand = null;
+        public RelayCommand RemoveProjectCommand => _removeProjectCommand ??
+            (_removeProjectCommand = new RelayCommand(x => HandleRemoveProject((int)x)));
 
         private RelayCommand _saveChangesCommand = null;
         public RelayCommand SaveChangesCommand => _saveChangesCommand ??
@@ -100,11 +108,32 @@ namespace NET_course_project.ViewModel
             });
         }
 
+        private void HandleRemoveToDo(int toDoId)
+        {
+            ToDo toDo = DbContext.ToDos.FirstOrDefault(x => x.Id == toDoId);
+            if (toDo == null)
+                return;
+
+            DbContext.ToDos.Remove(toDo);
+            DbRepository.SaveChanges();
+        }
+
         private void HandleAddProject()
         {
             DialogService.ShowDialog("AddProjectDialog", null, result => {
                 SelectedProject = result as Project;
             });
+        }
+
+        private void HandleRemoveProject(int projectId)
+        {
+            Project project = DbContext.Projects.FirstOrDefault(x => x.Id == projectId);
+            if (project == null)
+                return;
+
+            DbContext.ToDos.RemoveRange(project.ToDos);
+            DbContext.Projects.Remove(project);
+            DbRepository.SaveChanges();
         }
 
         private void HandleSaveChanges()

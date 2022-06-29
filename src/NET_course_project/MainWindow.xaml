@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NET_course_project"
         xmlns:misc="clr-namespace:NET_course_project.Misc"
+        xmlns:vm="clr-namespace:NET_course_project.ViewModel"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="To-Do List" Height="450" Width="800">
     <Window.Resources>
         <misc:BoolToVisibilityConverter x:Key="visibilityConverter"/>
+        <vm:MainWindowViewModel x:Key="viewModel"/>
     </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="viewModel"/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -31,15 +36,31 @@
                     <DataTemplate>
                         <Border Margin="4px" BorderBrush="Black" BorderThickness="2px">
                             <StackPanel Margin="4px">
-                                <TextBlock Text="{Binding Path=Title}" FontSize="12px"/>
+                                <TextBlock Text="{Binding Path=Title}" FontSize="12px">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete project"
+                                              Command="{Binding Source={StaticResource viewModel}, Path=RemoveProjectCommand}"
+                                              CommandParameter="{Binding Path=Id}"/>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
                                 <StackPanel>
                                     <ListBox ItemsSource="{Binding Path=ToDos}"
-                                             SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SelectedToDo}"
+                                             SelectedItem="{Binding Source={StaticResource viewModel},  Path=SelectedToDo}"
                                              SelectionChanged="SelectParent"
-                                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                             ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                             HorizontalContentAlignment="Stretch">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Margin="4px">
+                                                    <StackPanel.ContextMenu>
+                                                        <ContextMenu>
+                                                            <MenuItem Header="Delete to-do"
+                                                                      Command="{Binding Source={StaticResource viewModel}, Path=RemoveToDoCommand}"
+                                                                      CommandParameter="{Binding Path=Id}"/>
+                                                        </ContextMenu>
+                                                    </StackPanel.ContextMenu>
                                                     <TextBlock Text="{Binding Path=Title}"/>
                                                     <TextBlock Text="{Binding Path=Priority.Title}"/>
                                                 </StackPanel>
@@ -48,7 +69,7 @@
                                     </ListBox>
                                     <Button HorizontalAlignment="Center" Width="128px" Height="24px"
                                             Content="Add new to-do..."
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.AddToDoCommand}"
+                                            Command="{Binding Source={StaticResource viewModel}, Path=AddToDoCommand}"
                                             CommandParameter="{Binding Path=Id}"
                                             MouseDown="SelectParent"/>
                                 </StackPanel>

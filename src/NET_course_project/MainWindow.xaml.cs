@@ -12,7 +12,6 @@ namespace NET_course_project
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
         }
 
         private void SelectParent(object sender, RoutedEventArgs e)
