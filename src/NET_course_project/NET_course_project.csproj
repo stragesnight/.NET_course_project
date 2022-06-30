@@ -67,6 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="Misc\BoolToVisibilityConverter.cs" />
     <Compile Include="Misc\DialogService.cs" />
+    <Compile Include="Misc\FilterTask.cs" />
     <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Repository\ToDoListDbContext.cs" />
     <Compile Include="Repository\ToDoListDbInitializer.cs" />

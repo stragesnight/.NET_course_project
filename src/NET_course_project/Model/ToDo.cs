@@ -51,7 +51,7 @@ namespace NET_course_project.Model
             get => _title;
             set
             {
-                _title = value;
+                _title = value ?? String.Empty;
                 OnPropertyChanged("Title");
             }
         }
@@ -62,7 +62,7 @@ namespace NET_course_project.Model
             get => _description;
             set
             {
-                _description = value;
+                _description = value ?? String.Empty;
                 OnPropertyChanged("Description");
             }
         }

@@ -12,6 +12,52 @@ namespace NET_course_project.ViewModel
     {
         public ToDoListDbContext DbContext => DbRepository.DbContext;
 
+        private List<FilterTask<ToDo>> _filters = null;
+        public List<FilterTask<ToDo>> Filters
+        {
+            get => _filters;
+            set
+            {
+                _filters = value;
+                OnPropertyChanged("ToDoFilters");
+            }
+        }
+
+        private FilterTask<ToDo> _selectedFilter = null;
+        public FilterTask<ToDo> SelectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged("SelectedFilter");
+                FilterString = String.Empty;
+            }
+        }
+
+        private string _filterString = null;
+        public string FilterString
+        {
+            get => _filterString;
+            set
+            {
+                _filterString = value;
+                OnPropertyChanged("FilterString");
+                RefilterToDos();
+            }
+        }
+
+        private List<ToDo> _filteredToDos = null;
+        public List<ToDo> FilteredToDos
+        {
+            get => _filteredToDos;
+            set
+            {
+                _filteredToDos = value;
+                OnPropertyChanged("FilteredToDos");
+            }
+        }
+
         private ToDo _selectedToDo = null;
         public ToDo SelectedToDo
         {
@@ -101,6 +147,28 @@ namespace NET_course_project.ViewModel
 
         public MainWindowViewModel()
         {
+            Filters = new List<FilterTask<ToDo>> {
+                new FilterTask<ToDo>("Title", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.Title.ToLower().Contains(FilterString.ToLower())),
+
+                new FilterTask<ToDo>("Description", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.Description.ToLower().Contains(FilterString.ToLower())),
+
+                new FilterTask<ToDo>("Priority", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.Priority.Title.ToLower().Contains(FilterString.ToLower())),
+
+                new FilterTask<ToDo>("Project", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.Project.Title.ToLower().Contains(FilterString.ToLower())),
+
+                new FilterTask<ToDo>("Tag", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.ToDos_Tags.FirstOrDefault(x => x.Tag.Title.ToLower().Contains(FilterString.ToLower())) != null),
+
+                new FilterTask<ToDo>("Due date", toDo => String.IsNullOrEmpty(FilterString) ||
+                    toDo.DueTo.ToString().Contains(FilterString))
+            };
+
+            SelectedFilter = Filters[0];
+
             RecalculateOngoingToDos();
             DbRepository.ChangesSaved += OnChangesSaved;
         }
@@ -174,6 +242,11 @@ namespace NET_course_project.ViewModel
                 !x.Completed
                 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 3
                 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 7).ToList();
+        }
+
+        private void RefilterToDos()
+        {
+            FilteredToDos = SelectedFilter.FilterItems(DbContext.ToDos.Local);
         }
 
         private void OnChangesSaved()

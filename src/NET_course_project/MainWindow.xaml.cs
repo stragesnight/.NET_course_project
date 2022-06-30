@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using NET_course_project.ViewModel;
 
 namespace NET_course_project
 {
@@ -19,7 +18,7 @@ namespace NET_course_project
             ((sender as FrameworkElement).Parent as FrameworkElement).Focus();
         }
 
-        public void CloseWindow(object sender = null, RoutedEventArgs e = null)
+        private void CloseWindow(object sender = null, RoutedEventArgs e = null)
             => this.Close();
     }
 }

@@ -37,69 +37,113 @@
             <MenuItem Header="About"/>
             <MenuItem Header="Exit" Click="CloseWindow"/>
         </Menu>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="32px"/>
-            </Grid.RowDefinitions>
-            <ListBox Grid.Row="0" Grid.Column="0"
-                     ItemsSource="{Binding Path=DbContext.Projects.Local}"
-                     SelectedValue="{Binding Path=SelectedProject}"
-                     HorizontalContentAlignment="Stretch"
-                     ScrollViewer.CanContentScroll="False">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="4px" BorderBrush="Black" BorderThickness="2px">
-                            <StackPanel Margin="4px">
-                                <TextBlock Text="{Binding Path=Title}" FontSize="12px">
-                                    <TextBlock.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Add new to-do..."
+        <TabControl Grid.Row="1" Grid.Column="0">
+            <TabItem Header="Projects">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="32px"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" Grid.Column="0"
+                             ItemsSource="{Binding Path=DbContext.Projects.Local}"
+                             SelectedValue="{Binding Path=SelectedProject}"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.CanContentScroll="False">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="4px" BorderBrush="Black" BorderThickness="2px">
+                                    <StackPanel Margin="4px">
+                                        <TextBlock Text="{Binding Path=Title}" FontSize="12px">
+                                            <TextBlock.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add new to-do..."
                                                       Command="{Binding Source={StaticResource viewModel}, Path=AddToDoCommand}"
                                                       CommandParameter="{Binding Path=Id}"/>
-                                            <MenuItem Header="Delete project"
+                                                    <MenuItem Header="Delete project"
                                                       Command="{Binding Source={StaticResource viewModel}, Path=RemoveProjectCommand}"
                                                       CommandParameter="{Binding Path=Id}"/>
-                                        </ContextMenu>
-                                    </TextBlock.ContextMenu>
-                                </TextBlock>
-                                <StackPanel>
-                                    <ListBox ItemsSource="{Binding Path=ToDos}"
-                                             SelectedValue="{Binding Source={StaticResource viewModel}, Path=SelectedToDo, Mode=TwoWay, FallbackValue=-1}"
+                                                </ContextMenu>
+                                            </TextBlock.ContextMenu>
+                                        </TextBlock>
+                                        <StackPanel>
+                                            <ListBox ItemsSource="{Binding Path=ToDos}"
+                                             SelectedValue="{Binding Source={StaticResource viewModel}, Path=SelectedToDo, Mode=TwoWay}"
                                              SelectionChanged="SelectParent"
                                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                              HorizontalContentAlignment="Stretch">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Margin="4px">
-                                                    <StackPanel.ContextMenu>
-                                                        <ContextMenu>
-                                                            <MenuItem Header="Delete to-do"
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Margin="4px">
+                                                            <StackPanel.ContextMenu>
+                                                                <ContextMenu>
+                                                                    <MenuItem Header="Delete to-do"
                                                                       Command="{Binding Source={StaticResource viewModel}, Path=RemoveToDoCommand}"
                                                                       CommandParameter="{Binding Path=Id}"/>
-                                                        </ContextMenu>
-                                                    </StackPanel.ContextMenu>
-                                                    <TextBlock Text="{Binding Path=Title}"/>
-                                                    <TextBlock Text="{Binding Path=Priority.Title}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <Button HorizontalAlignment="Center" Width="128px" Height="24px"
+                                                                </ContextMenu>
+                                                            </StackPanel.ContextMenu>
+                                                            <TextBlock Text="{Binding Path=Title}"/>
+                                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                            <Button HorizontalAlignment="Center" Width="128px" Height="24px"
                                             Content="Add new to-do..."
                                             Command="{Binding Source={StaticResource viewModel}, Path=AddToDoCommand}"
                                             CommandParameter="{Binding Path=Id}"
                                             MouseDown="SelectParent"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Button Grid.Row="1" Grid.Column="0" Height="32px"
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Grid.Row="1" Grid.Column="0" Height="32px"
                     Content="Add new project..."
                     Command="{Binding Path=AddProjectCommand}"/>
-        </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="To-do view">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48px"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left"
+                                       VerticalAlignment="Center"
+                                       Text="Search to-do's by: "/>
+                            <ComboBox DockPanel.Dock="Right"
+                                      ItemsSource="{Binding Path=Filters}"
+                                      SelectedValue="{Binding Path=SelectedFilter, Mode=TwoWay}"/>
+                        </DockPanel>
+                        <TextBox Text="{Binding Path=FilterString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <ListBox Grid.Row="1" Grid.Column="0"
+                             ItemsSource="{Binding Path=FilteredToDos}"
+                             SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.CanContentScroll="False">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="4px">
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete to-do"
+                                                      Command="{Binding Source={StaticResource viewModel}, Path=RemoveToDoCommand}"
+                                                      CommandParameter="{Binding Path=Id}"/>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                    <TextBlock Text="{Binding Path=Title}"/>
+                                    <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
         <Grid Grid.Row="1" Grid.Column="1"
               Visibility="{Binding Path=IsSomeToDoSelected, Converter={StaticResource visibilityConverter}}">
             <Grid.ColumnDefinitions>
