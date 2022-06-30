@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace NET_course_project.Misc
 {
@@ -17,7 +17,14 @@ namespace NET_course_project.Misc
 
         public List<T> FilterItems(IEnumerable<T> items)
         {
-            return items.Where(x => Predicate(x)).ToList();
+            try
+            {
+                return items.Where(x => Predicate(x)).ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public override string ToString() => Title;

@@ -17,10 +17,10 @@ namespace NET_course_project.Repository
         public DbSet<ToDo_Tag> ToDos_Tags { get; set; }
 
 
-        // тимчасова заглушка ініціалізатора
-        public ToDoListDbContext() : base("ToDoListDb")
+        public ToDoListDbContext(string connStr)
         {
-            Database.SetInitializer(new ToDoListDbInitializer());
+            Database.Connection.ConnectionString = connStr;
+            //Database.SetInitializer(new ToDoListDbInitializer());
         }
     }
 }

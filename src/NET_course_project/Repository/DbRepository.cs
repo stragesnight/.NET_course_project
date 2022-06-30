@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Windows;
 using System.Data.Entity;
+using System.Configuration;
+using NET_course_project.Misc;
 using NET_course_project.Model;
 
 namespace NET_course_project.Repository
@@ -10,10 +13,23 @@ namespace NET_course_project.Repository
         public static ToDoListDbContext DbContext { get; private set; } = null;
 
 
-        static DbRepository()
+        public static bool Initialize(User user)
         {
-            DbContext = new ToDoListDbContext();
-            ReloadLocal();
+            try
+            {
+                string baseConnStr = ConfigurationManager.ConnectionStrings["conn_str"].ConnectionString;
+                baseConnStr = baseConnStr.Replace("{USER_ID}", user.Login);
+                baseConnStr = baseConnStr.Replace("{PASSWORD}", user.Password);
+                DbContext = new ToDoListDbContext(baseConnStr);
+                ReloadLocal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public static ToDo AddToDo(ToDo toAdd)
@@ -46,9 +62,16 @@ namespace NET_course_project.Repository
 
         public static void SaveChanges()
         {
-            DbContext.SaveChanges();
-            //ReloadLocal();
-            ChangesSaved?.Invoke();
+            try
+            {
+                DbContext.SaveChanges();
+                //ReloadLocal();
+                ChangesSaved?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void ReloadLocal()

@@ -8,7 +8,7 @@ namespace NET_course_project.Repository
     /// <summary>
     /// Клас-ініціалізатор для контексту бази даних.
     /// </summary>
-    public class ToDoListDbInitializer : DropCreateDatabaseIfModelChanges<ToDoListDbContext>
+    public class ToDoListDbInitializer : DropCreateDatabaseAlways<ToDoListDbContext>
     {
         private static readonly int _nEntries = 10;
 
@@ -70,8 +70,45 @@ namespace NET_course_project.Repository
             context.SaveChanges();
         }
 
+        private void CreateUsers(ToDoListDbContext context)
+        {
+            try
+            {
+                context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; "+
+                    "DROP LOGIN ADMIN_LOGIN; " +
+                    "DROP LOGIN WORKER_LOGIN;");
+                context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; " +
+                    "DROP USER ADMIN;" +
+                    "DROP USER WORKER");
+            }
+            catch (Exception)
+            { }
+            context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; " +
+                "CREATE LOGIN ADMIN_LOGIN WITH PASSWORD = 'admin_password'; " +
+                "CREATE LOGIN WORKER_LOGIN WITH PASSWORD = 'worker_password'");
+            context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; " +
+                "CREATE USER ADMIN FOR LOGIN ADMIN_LOGIN; " +
+                "CREATE USER WORKER FOR LOGIN WORKER_LOGIN");
+            context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; " +
+                "GRANT SELECT, INSERT, DELETE, UPDATE ON SCHEMA :: [dbo] TO ADMIN");
+            context.Database.ExecuteSqlCommand(
+                    "USE [ToDoListDb]; " +
+                "GRANT SELECT ON [Projects] TO WORKER; " +
+                "GRANT SELECT, INSERT, DELETE, UPDATE ON [dbo].[ToDoes] TO WORKER;" +
+                "GRANT SELECT, INSERT, DELETE, UPDATE ON [dbo].[Priorities] TO WORKER;" +
+                "GRANT SELECT, INSERT, DELETE, UPDATE ON [dbo].[Tags] TO WORKER;" +
+                "GRANT SELECT, INSERT, DELETE, UPDATE ON [dbo].[ToDo_Tag] TO WORKER;");
+        }
+
         protected override void Seed(ToDoListDbContext context)
         {
+            CreateUsers(context);
+
 #if DEBUG
             AddTestTags(context);
             AddTestPriorities(context);
@@ -79,6 +116,7 @@ namespace NET_course_project.Repository
             AddTestToDos(context);
             AddTestToDos_Tags(context);
 #endif
+
             base.Seed(context);
         }
     }
