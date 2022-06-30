@@ -95,6 +95,10 @@ namespace NET_course_project.ViewModel
         public RelayCommand AddTagCommand => _addTagCommand ??
             (_addTagCommand = new RelayCommand(x => HandleAddTag((int)x)));
 
+        private RelayCommand _removeTagCommand = null;
+        public RelayCommand RemoveTagCommand => _removeTagCommand ??
+            (_removeTagCommand = new RelayCommand(x => HandleRemoveTag((int)x)));
+
         public MainWindowViewModel()
         {
             RecalculateOngoingToDos();
@@ -142,6 +146,16 @@ namespace NET_course_project.ViewModel
             DialogService.ShowDialog("AddTagDialog", toDoId, result => {
                 HandleSaveChanges();
             });
+        }
+
+        private void HandleRemoveTag(int todo_tagId)
+        {
+            ToDo_Tag tdt = DbContext.ToDos_Tags.FirstOrDefault(x => x.Id == todo_tagId);
+            if (tdt == null)
+                return;
+
+            DbContext.ToDos_Tags.Remove(tdt);
+            DbRepository.SaveChanges();
         }
 
         private void RecalculateOngoingToDos()

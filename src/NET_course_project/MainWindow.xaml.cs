@@ -18,5 +18,8 @@ namespace NET_course_project
         {
             ((sender as FrameworkElement).Parent as FrameworkElement).Focus();
         }
+
+        public void CloseWindow(object sender = null, RoutedEventArgs e = null)
+            => this.Close();
     }
 }
