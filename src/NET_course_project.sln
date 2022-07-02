@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET_course_project", "NET_c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListCommon", "ToDoListDbModel\ToDoListCommon.csproj", "{4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListDbInitializer", "ToDoListDbInitializer\ToDoListDbInitializer.csproj", "{6B7348EE-55F0-42A2-850D-5D47C2F4B6E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C} = {4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,10 @@ Global
 		{4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CA6F161-1E2F-4352-A7CB-ECC66BF5D88C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B7348EE-55F0-42A2-850D-5D47C2F4B6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B7348EE-55F0-42A2-850D-5D47C2F4B6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B7348EE-55F0-42A2-850D-5D47C2F4B6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B7348EE-55F0-42A2-850D-5D47C2F4B6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

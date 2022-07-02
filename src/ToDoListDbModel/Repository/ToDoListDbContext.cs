@@ -17,10 +17,11 @@ namespace ToDoListCommon.Repository
         public DbSet<ToDo_Tag> ToDos_Tags { get; set; }
 
 
-        public ToDoListDbContext(string connStr)
+        public ToDoListDbContext(string connStr, bool initializeDB = false)
         {
             Database.Connection.ConnectionString = connStr;
-            //Database.SetInitializer(new ToDoListDbInitializer());
+            if (initializeDB)
+                Database.SetInitializer(new ToDoListDbInitializer());
         }
     }
 }

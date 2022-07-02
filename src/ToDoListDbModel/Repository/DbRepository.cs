@@ -12,7 +12,6 @@ namespace ToDoListCommon.Repository
         public static event Action ChangesSaved;
         public static ToDoListDbContext DbContext { get; private set; } = null;
 
-
         public static bool Initialize(User user)
         {
             try
