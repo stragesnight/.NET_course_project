@@ -35,5 +35,19 @@ namespace NET_course_project.Misc
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public static void ShowWindow(string windowName)
+        {
+            try
+            {
+                Type type = Type.GetType($"NET_course_project.View.{windowName}");
+                Window window = Activator.CreateInstance(type) as Window;
+                window.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using NET_course_project.Misc;
 using NET_course_project.Model;
 using NET_course_project.Repository;
+using System.Diagnostics;
 
 namespace NET_course_project.ViewModel
 {
@@ -32,6 +33,17 @@ namespace NET_course_project.ViewModel
             {
                 _isUserPriviliged = value;
                 OnPropertyChanged("IsUserPriviliged");
+            }
+        }
+
+        private bool _shouldClose = false;
+        public bool ShouldClose
+        {
+            get => _shouldClose;
+            set
+            {
+                _shouldClose = value;
+                OnPropertyChanged("ShouldClose");
             }
         }
 
@@ -168,6 +180,18 @@ namespace NET_course_project.ViewModel
         public RelayCommand RemoveTagCommand => _removeTagCommand ??
             (_removeTagCommand = new RelayCommand(x => HandleRemoveTag((int)x)));
 
+        private RelayCommand _showHelpCommand = null;
+        public RelayCommand ShowHelpCommand => _showHelpCommand ??
+            (_showHelpCommand = new RelayCommand(x => HandleShowHelp()));
+
+        private RelayCommand _logoutCommand = null;
+        public RelayCommand LogoutCommand => _logoutCommand ??
+            (_logoutCommand = new RelayCommand(x => HandleLogout()));
+
+        private RelayCommand _showAboutCommand = null;
+        public RelayCommand ShowAboutCommand => _showAboutCommand ??
+            (_showAboutCommand = new RelayCommand(x => HandleShowAbout()));
+
         public MainWindowViewModel()
         {
             Filters = new List<FilterTask<ToDo>> {
@@ -247,6 +271,27 @@ namespace NET_course_project.ViewModel
 
             DbContext.ToDos_Tags.Remove(tdt);
             DbRepository.SaveChanges();
+        }
+
+        private void HandleShowHelp()
+        {
+            try
+            {
+                Process.Start("https://github.com/stragesnight/.NET_course_project/");
+            }
+            catch (Exception)
+            { }
+        }
+
+        private void HandleLogout()
+        {
+            DialogService.ShowWindow("AuthorizationWindow");
+            ShouldClose = true;
+        }
+
+        private void HandleShowAbout()
+        {
+            DialogService.ShowWindow("AboutWindow");
         }
 
         private void RecalculateOngoingToDos()

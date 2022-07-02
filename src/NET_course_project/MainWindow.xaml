@@ -8,6 +8,7 @@
         xmlns:vm="clr-namespace:NET_course_project.ViewModel"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+        x:Name="mainWindow"
         Title="To-Do List" Height="450" Width="800">
     <Window.Resources>
         <misc:BoolToVisibilityConverter x:Key="visibilityConverter"/>
@@ -17,6 +18,11 @@
         <StaticResource ResourceKey="viewModel"/>
     </Window.DataContext>
     <Grid>
+        <i:Interaction.Triggers>
+            <i:DataTrigger Binding="{Binding Path=ShouldClose}" Value="True">
+                <i:CallMethodAction MethodName="Close" TargetObject="{Binding ElementName=mainWindow}"/>
+            </i:DataTrigger>
+        </i:Interaction.Triggers>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
@@ -32,10 +38,14 @@
                 <MenuItem Header="Add new project..."
                           Command="{Binding Path=AddProjectCommand}"/>
             </MenuItem>
-            <MenuItem Header="Help"/>
-            <MenuItem Header="Log-out"/>
-            <MenuItem Header="About"/>
-            <MenuItem Header="Exit" Click="CloseWindow"/>
+            <MenuItem Header="Help"
+                      Command="{Binding Path=ShowHelpCommand}"/>
+            <MenuItem Header="Log-out"
+                      Command="{Binding Path=LogoutCommand}"/>
+            <MenuItem Header="About"
+                      Command="{Binding Path=ShowAboutCommand}"/>
+            <MenuItem Header="Exit"
+                      Click="CloseWindow"/>
         </Menu>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="Projects">
