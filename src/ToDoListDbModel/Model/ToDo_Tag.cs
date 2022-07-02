@@ -1,7 +1,7 @@
 ﻿using System;
-using NET_course_project.Misc;
+using ToDoListCommon.Misc;
 
-namespace NET_course_project.Model
+namespace ToDoListCommon.Model
 {
     /// <summary>
     /// Проміжний клас між справою та тегом. Реалізує зв'язок багато-до-багатьох.

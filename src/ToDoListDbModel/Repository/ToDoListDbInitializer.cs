@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity;
-using NET_course_project.Model;
+using ToDoListCommon.Model;
 
-namespace NET_course_project.Repository
+namespace ToDoListCommon.Repository
 {
     /// <summary>
     /// Клас-ініціалізатор для контексту бази даних.

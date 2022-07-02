@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
-using NET_course_project.Model;
+using ToDoListCommon.Model;
 
-namespace NET_course_project.Repository
+namespace ToDoListCommon.Repository
 {
     /// <summary>
     /// Клас, що реалізує підтримку EntityFramework.

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using NET_course_project.Misc;
-using NET_course_project.Model;
-using NET_course_project.Repository;
+using ToDoListCommon.Misc;
+using ToDoListCommon.Model;
+using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {

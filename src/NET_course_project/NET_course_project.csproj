@@ -35,7 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -83,13 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Misc\BoolToVisibilityConverter.cs" />
     <Compile Include="Misc\DialogService.cs" />
-    <Compile Include="Misc\FilterTask.cs" />
-    <Compile Include="Misc\User.cs" />
-    <Compile Include="Repository\DbRepository.cs" />
-    <Compile Include="Repository\ToDoListDbContext.cs" />
-    <Compile Include="Repository\ToDoListDbInitializer.cs" />
-    <Compile Include="Misc\Observable.cs" />
-    <Compile Include="Misc\RelayCommand.cs" />
+    <Compile Include="Misc\IDialog.cs" />
     <Compile Include="ViewModel\AddProjectDialogViewModel.cs" />
     <Compile Include="ViewModel\AddTagDialogViewModel.cs" />
     <Compile Include="ViewModel\AddToDoDialogViewModel.cs" />
@@ -113,7 +107,6 @@
     <Compile Include="View\BaseDialogWindow.xaml.cs">
       <DependentUpon>BaseDialogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Misc\IDialog.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,11 +145,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Priority.cs" />
-    <Compile Include="Model\Project.cs" />
-    <Compile Include="Model\Tag.cs" />
-    <Compile Include="Model\ToDo.cs" />
-    <Compile Include="Model\ToDo_Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -194,6 +182,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoListDbModel\ToDoListCommon.csproj">
+      <Project>{4ca6f161-1e2f-4352-a7cb-ecc66bf5d88c}</Project>
+      <Name>ToDoListCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

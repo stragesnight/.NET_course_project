@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using NET_course_project.Misc;
+using ToDoListCommon.Misc;
 
-namespace NET_course_project.Model
+namespace ToDoListCommon.Model
 {
     /// <summary>
     /// Клас, що описує конкретну справу.

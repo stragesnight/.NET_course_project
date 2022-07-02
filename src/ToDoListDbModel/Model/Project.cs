@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using NET_course_project.Misc;
+using ToDoListCommon.Misc;
 
-namespace NET_course_project.Model
+namespace ToDoListCommon.Model
 {
     /// <summary>
-    /// Клас, що описує теги для справ.
+    /// Клас, що описує проект (групу справ).
     /// </summary>
-    public class Tag : Observable
+    public class Project : Observable
     {
         public int Id { get; set; }
 
@@ -23,12 +23,13 @@ namespace NET_course_project.Model
             }
         }
 
-        public virtual ICollection<ToDo_Tag> ToDos_Tags { get; set; }
+        public virtual ICollection<ToDo> ToDos { get; set; }
 
-
-        public Tag()
+        public Project()
         {
-            ToDos_Tags = new ObservableCollection<ToDo_Tag>();
+            ToDos = new ObservableCollection<ToDo>();
         }
+
+        public override string ToString() => Title;
     }
 }

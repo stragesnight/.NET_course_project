@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
-namespace NET_course_project.Misc
+namespace ToDoListCommon.Misc
 {
     /// <summary>
     /// Клас, що реалізує інтерфейс ICommand.

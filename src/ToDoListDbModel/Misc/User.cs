@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NET_course_project.Misc
+namespace ToDoListCommon.Misc
 {
     public class User : Observable
     {

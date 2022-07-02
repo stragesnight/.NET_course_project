@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Data.Entity;
 using System.Configuration;
-using NET_course_project.Misc;
-using NET_course_project.Model;
+using ToDoListCommon.Misc;
+using ToDoListCommon.Model;
 
-namespace NET_course_project.Repository
+namespace ToDoListCommon.Repository
 {
     public static class DbRepository
     {

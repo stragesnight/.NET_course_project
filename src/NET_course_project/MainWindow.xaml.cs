@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using NET_course_project.Misc;
 using NET_course_project.ViewModel;
+using ToDoListCommon.Misc;
 
 namespace NET_course_project
 {

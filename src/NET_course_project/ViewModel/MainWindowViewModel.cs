@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Collections.Generic;
 using NET_course_project.Misc;
-using NET_course_project.Model;
-using NET_course_project.Repository;
-using System.Diagnostics;
+using ToDoListCommon.Misc;
+using ToDoListCommon.Model;
+using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
