@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using NET_course_project.Misc;
+using NET_course_project.ViewModel;
 
 namespace NET_course_project
 {
@@ -8,9 +10,13 @@ namespace NET_course_project
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
+            if (this.DataContext != null)
+                (this.DataContext as MainWindowViewModel).User = user;
+            else
+                this.DataContextChanged += (s, e) => (this.DataContext as MainWindowViewModel).User = user;
         }
 
         private void SelectParent(object sender, RoutedEventArgs e)

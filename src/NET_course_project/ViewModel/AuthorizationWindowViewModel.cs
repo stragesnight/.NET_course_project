@@ -39,7 +39,7 @@ namespace NET_course_project.ViewModel
         private void HandleAuthorize()
         {
             if (DbRepository.Initialize(CreatedUser))
-                new MainWindow().Show();
+                new MainWindow(CreatedUser).Show();
         }
     }
 }

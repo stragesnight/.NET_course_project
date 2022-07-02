@@ -57,11 +57,12 @@
                                             <TextBlock.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add new to-do..."
-                                                      Command="{Binding Source={StaticResource viewModel}, Path=AddToDoCommand}"
-                                                      CommandParameter="{Binding Path=Id}"/>
+                                                              Command="{Binding Source={StaticResource viewModel}, Path=AddToDoCommand}"
+                                                              CommandParameter="{Binding Path=Id}"/>
                                                     <MenuItem Header="Delete project"
-                                                      Command="{Binding Source={StaticResource viewModel}, Path=RemoveProjectCommand}"
-                                                      CommandParameter="{Binding Path=Id}"/>
+                                                              IsEnabled="{Binding Source={StaticResource viewModel}, Path=IsUserPriviliged}"
+                                                              Command="{Binding Source={StaticResource viewModel}, Path=RemoveProjectCommand}"
+                                                              CommandParameter="{Binding Path=Id}"/>
                                                 </ContextMenu>
                                             </TextBlock.ContextMenu>
                                         </TextBlock>
@@ -99,8 +100,9 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <Button Grid.Row="1" Grid.Column="0" Height="32px"
-                    Content="Add new project..."
-                    Command="{Binding Path=AddProjectCommand}"/>
+                            IsEnabled="{Binding Path=IsUserPriviliged}"
+                            Content="Add new project..."
+                            Command="{Binding Path=AddProjectCommand}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="To-do view">

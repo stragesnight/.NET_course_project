@@ -1,16 +1,39 @@
 ﻿using System;
 using System.Linq;
 using System.Data.Entity;
+using System.Collections.Generic;
 using NET_course_project.Misc;
 using NET_course_project.Model;
 using NET_course_project.Repository;
-using System.Collections.Generic;
 
 namespace NET_course_project.ViewModel
 {
     public class MainWindowViewModel : Observable
     {
         public ToDoListDbContext DbContext => DbRepository.DbContext;
+
+        private User _user = null;
+        public User User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                OnPropertyChanged("User");
+                IsUserPriviliged = User?.Login.ToLower().Contains("admin") ?? true;
+            }
+        }
+
+        private bool _isUserPriviliged = false;
+        public bool IsUserPriviliged
+        {
+            get => _isUserPriviliged;
+            set
+            {
+                _isUserPriviliged = value;
+                OnPropertyChanged("IsUserPriviliged");
+            }
+        }
 
         private List<FilterTask<ToDo>> _filters = null;
         public List<FilterTask<ToDo>> Filters
