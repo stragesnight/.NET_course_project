@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using NET_course_project.Misc;
 using NET_course_project.Repository;
 
@@ -15,6 +14,17 @@ namespace NET_course_project.ViewModel
             {
                 _createdUser= value;
                 OnPropertyChanged("CreatedUser");
+            }
+        }
+
+        private bool _shouldClose = false;
+        public bool ShouldClose
+        {
+            get => _shouldClose;
+            set
+            {
+                _shouldClose = value;
+                OnPropertyChanged("ShouldClose");
             }
         }
 
@@ -39,7 +49,10 @@ namespace NET_course_project.ViewModel
         private void HandleAuthorize()
         {
             if (DbRepository.Initialize(CreatedUser))
+            {
                 new MainWindow(CreatedUser).Show();
+                ShouldClose = true;
+            }
         }
     }
 }

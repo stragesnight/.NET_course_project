@@ -18,6 +18,17 @@ namespace NET_course_project.ViewModel
             }
         }
 
+        private bool _shouldClose = false;
+        public bool ShouldClose
+        {
+            get => _shouldClose;
+            set
+            {
+                _shouldClose = value;
+                OnPropertyChanged("ShouldClose");
+            }
+        }
+
         public object InitialState { get; set; }
         public object ResultState
         {
@@ -28,12 +39,17 @@ namespace NET_course_project.ViewModel
 
         private RelayCommand _addProjectCommand = null;
         public RelayCommand AddProjectCommand => _addProjectCommand ??
-            (_addProjectCommand = new RelayCommand(x => DbRepository.AddProject(CreatedProject)));
+            (_addProjectCommand = new RelayCommand(x => HandleAddProject()));
 
 
         public AddProjectDialogViewModel()
         {
             CreatedProject = new Project();
+        }
+
+        private void HandleAddProject()
+        {
+            ShouldClose = DbRepository.AddProject(CreatedProject) != null;
         }
     }
 }

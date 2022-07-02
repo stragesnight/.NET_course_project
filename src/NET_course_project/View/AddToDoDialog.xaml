@@ -9,6 +9,11 @@
              Height="400" Width="500"
              x:Name="Add_to_do">
     <Grid Background="White">
+        <i:Interaction.Triggers>
+            <i:DataTrigger Binding="{Binding Path=ShouldClose}" Value="True">
+                <i:CallMethodAction MethodName="CloseWindow" TargetObject="{Binding ElementName=Add_to_do}"/>
+            </i:DataTrigger>
+        </i:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height=".8*"/>
             <RowDefinition Height="5*"/>
@@ -37,17 +42,10 @@
             <DatePicker x:Name="dueToDatePicker" SelectedDate="{Binding Path=CreatedToDo.DueTo}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
-                Content="Create to-do">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:CallMethodAction MethodName="CloseWindow" TargetObject="{Binding ElementName=Add_to_do}"/>
-                    <i:InvokeCommandAction Command="{Binding Path=AddToDoCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+                Content="Create to-do"
+                Command="{Binding Path=AddToDoCommand}"/>
         <Button Grid.Row="2" Grid.Column="3"
                 Content="Cancel"
-                Click="CloseWindow">
-        </Button>
+                Click="CloseWindow"/>
     </Grid>
 </UserControl>

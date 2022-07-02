@@ -20,6 +20,17 @@ namespace NET_course_project.ViewModel
             }
         }
 
+        private bool _shouldClose = false;
+        public bool ShouldClose
+        {
+            get => _shouldClose;
+            set
+            {
+                _shouldClose = value;
+                OnPropertyChanged("ShouldClose");
+            }
+        }
+
         public object InitialState { get; set; }
         public object ResultState
         {
@@ -30,7 +41,7 @@ namespace NET_course_project.ViewModel
 
         private RelayCommand _addToDoCommand = null;
         public RelayCommand AddToDoCommand => _addToDoCommand ??
-            (_addToDoCommand = new RelayCommand(x => CreatedToDo = DbRepository.AddToDo(CreatedToDo)));
+            (_addToDoCommand = new RelayCommand(x => HandleAddToDo()));
 
 
         public AddToDoDialogViewModel(int projectId)
@@ -38,6 +49,11 @@ namespace NET_course_project.ViewModel
             CreatedToDo = new ToDo();
             CreatedToDo.ProjectId = projectId;
             CreatedToDo.DueTo = DateTime.Now;
+        }
+
+        private void HandleAddToDo()
+        {
+            ShouldClose = (CreatedToDo = DbRepository.AddToDo(CreatedToDo)) != null;
         }
     }
 }

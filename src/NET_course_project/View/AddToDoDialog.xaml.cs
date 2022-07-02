@@ -19,7 +19,10 @@ namespace NET_course_project.View
             this.DataContext = new AddToDoDialogViewModel((int)initialState);
         }
 
-        public void CloseWindow(object sender = null, RoutedEventArgs e = null)
+        public void CloseWindow()
             => (this.Parent as Window).Close();
+
+        public void CloseWindow(object sender, RoutedEventArgs e)
+            => CloseWindow();
     }
 }

@@ -19,6 +19,17 @@ namespace NET_course_project.ViewModel
             }
         }
 
+        private bool _shouldClose = false;
+        public bool ShouldClose
+        {
+            get => _shouldClose;
+            set
+            {
+                _shouldClose = value;
+                OnPropertyChanged("ShouldClose");
+            }
+        }
+
         public object InitialState { get; set; }
         public object ResultState
         {
@@ -45,10 +56,10 @@ namespace NET_course_project.ViewModel
             Tag tag = DbRepository.DbContext.Tags.FirstOrDefault(x => x.Title == _createdTag.Title);
             _createdTag = tag == null ? DbRepository.AddTag(_createdTag) : tag;
 
-            DbRepository.AddToDo_Tag(new ToDo_Tag {
+            ShouldClose = DbRepository.AddToDo_Tag(new ToDo_Tag {
                 ToDoId = _toDoId,
                 TagId = _createdTag.Id
-            });
+            }) != null;
         }
     }
 }

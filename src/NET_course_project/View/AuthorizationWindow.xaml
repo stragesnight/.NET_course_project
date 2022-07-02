@@ -9,6 +9,11 @@
         x:Name="auth_window"
         Title="Authorization" Height="250" Width="350">
     <Grid>
+        <i:Interaction.Triggers>
+            <i:DataTrigger Binding="{Binding Path=ShouldClose}" Value="True">
+                <i:CallMethodAction MethodName="Close" TargetObject="{Binding ElementName=auth_window}"/>
+            </i:DataTrigger>
+        </i:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
             <RowDefinition Height="4*"/>
@@ -32,14 +37,8 @@
             <TextBox Text="{Binding Path=CreatedUser.Password, Mode=TwoWay}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
-                Content="Authorize">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding Path=AuthorizeCommand}"/>
-                    <i:CallMethodAction MethodName="CloseWindow" TargetObject="{Binding ElementName=auth_window}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+                Content="Authorize"
+                Command="{Binding Path=AuthorizeCommand}"/>
         <Button Grid.Row="2" Grid.Column="3"
                 Content="Exit"
                 Click="CloseWindow">

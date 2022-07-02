@@ -15,7 +15,7 @@ namespace NET_course_project.View
             this.DataContext = new AuthorizationWindowViewModel();
         }
 
-        public void CloseWindow(object sender = null, RoutedEventArgs e = null)
+        public void CloseWindow(object sender, RoutedEventArgs e)
             => this.Close();
     }
 }

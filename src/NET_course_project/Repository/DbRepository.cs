@@ -25,7 +25,7 @@ namespace NET_course_project.Repository
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Unable to initialize database.\nError message: " + ex.Message);
                 return false;
             }
 
@@ -34,31 +34,63 @@ namespace NET_course_project.Repository
 
         public static ToDo AddToDo(ToDo toAdd)
         {
-            ToDo tmp = DbContext.ToDos.Add(toAdd);
-            SaveChanges();
-            return tmp;
+            try
+            {
+                ToDo tmp = DbContext.ToDos.Add(toAdd);
+                SaveChanges();
+                return tmp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to add to-do.\nError message: " + ex.Message);
+                return null;
+            }
         }
 
         public static Project AddProject(Project toAdd)
         {
-            Project tmp = DbContext.Projects.Add(toAdd);
-            SaveChanges();
-            return tmp;
-        }
+            try
+            {
+                Project tmp = DbContext.Projects.Add(toAdd);
+                SaveChanges();
+                return tmp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to add project.\nError message: " + ex.Message);
+                return null;
+            }
+}
 
         public static Tag AddTag(Tag toAdd)
         {
-            Tag tmp = DbContext.Tags.Add(toAdd);
-            SaveChanges();
-            return tmp;
+            try
+            {
+                Tag tmp = DbContext.Tags.Add(toAdd);
+                SaveChanges();
+                return tmp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to add tag.\nError message: " + ex.Message);
+                return null;
+            }
         }
 
         public static ToDo_Tag AddToDo_Tag(ToDo_Tag toAdd)
         {
-            ToDo_Tag tmp = DbContext.ToDos_Tags.Add(toAdd);
-            SaveChanges();
-            return tmp;
-        }
+            try
+            {
+                ToDo_Tag tmp = DbContext.ToDos_Tags.Add(toAdd);
+                SaveChanges();
+                return tmp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to add tag to to-do.\nError message: " + ex.Message);
+                return null;
+            }
+}
 
         public static void SaveChanges()
         {

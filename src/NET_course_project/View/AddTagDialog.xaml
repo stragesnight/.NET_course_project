@@ -9,6 +9,11 @@
              Height="200" Width="300"
              x:Name="Add_tag">
     <Grid Background="White">
+        <i:Interaction.Triggers>
+            <i:DataTrigger Binding="{Binding Path=ShouldClose}" Value="True">
+                <i:CallMethodAction MethodName="CloseWindow" TargetObject="{Binding ElementName=Add_tag}"/>
+            </i:DataTrigger>
+        </i:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
             <RowDefinition Height="4*"/>
@@ -29,18 +34,11 @@
             <TextBox x:Name="projectNameTextBox" Text="{Binding Path=CreatedTag.Title}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
-                Content="Add tag">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:CallMethodAction MethodName="CloseWindow" TargetObject="{Binding ElementName=Add_tag}"/>
-                    <i:InvokeCommandAction Command="{Binding Path=AddTagCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+                Content="Add tag"
+                Command="{Binding Path=AddTagCommand}"/>
         <Button Grid.Row="2" Grid.Column="3"
                 Content="Cancel"
-                Click="CloseWindow">
-        </Button>
+                Click="CloseWindow"/>
     </Grid>
 </UserControl>
 
