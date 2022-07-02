@@ -38,10 +38,12 @@
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Authorize"
-                Command="{Binding Path=AuthorizeCommand}"/>
+                Command="{Binding Path=AuthorizeCommand, IsAsync=True}"
+                IsEnabled="{Binding Path=IsNotBusy}"/>
         <Button Grid.Row="2" Grid.Column="3"
                 Content="Exit"
-                Click="CloseWindow">
+                Click="CloseWindow"
+                IsEnabled="{Binding Path=IsNotBusy}">
         </Button>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using NET_course_project.Misc;
 using NET_course_project.Repository;
 
@@ -28,6 +29,17 @@ namespace NET_course_project.ViewModel
             }
         }
 
+        private bool _isNotBusy = true;
+        public bool IsNotBusy
+        {
+            get => _isNotBusy;
+            set
+            {
+                _isNotBusy = value;
+                OnPropertyChanged("IsNotBusy");
+            }
+        }
+
         public object InitialState { get; set; }
         public object ResultState
         {
@@ -38,7 +50,7 @@ namespace NET_course_project.ViewModel
 
         private RelayCommand _authorize = null;
         public RelayCommand AuthorizeCommand => _authorize ??
-            (_authorize= new RelayCommand(x => HandleAuthorize()));
+            (_authorize= new RelayCommand(x => HandleAuthorize(), true));
 
 
         public AuthorizationWindowViewModel()
@@ -48,11 +60,18 @@ namespace NET_course_project.ViewModel
 
         private void HandleAuthorize()
         {
+            IsNotBusy = false;
+
             if (DbRepository.Initialize(CreatedUser))
             {
-                new MainWindow(CreatedUser).Show();
-                ShouldClose = true;
+                Application.Current.Dispatcher.Invoke(new Action(() => {
+                    MainWindow window = new MainWindow(CreatedUser);
+                    window.Show();
+                    ShouldClose = true;
+                }));
             }
+
+            IsNotBusy = true;
         }
     }
 }

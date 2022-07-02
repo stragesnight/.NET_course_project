@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NET_course_project.Misc
@@ -17,14 +18,22 @@ namespace NET_course_project.Misc
 
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
+        private bool _isAsync;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public RelayCommand(Action<object> execute, bool isAsync = false, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
+            _isAsync = isAsync;
         }
 
         public bool CanExecute(object param) => _canExecute == null || _canExecute(param);
-        public void Execute(object param) => _execute?.Invoke(param);
+        public void Execute(object param)
+        {
+            if (_isAsync)
+                Task.Factory.StartNew(new Action(() => _execute(param)));
+            else
+                _execute(param);
+        }
     }
 }
