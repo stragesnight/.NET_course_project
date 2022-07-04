@@ -10,6 +10,11 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
+				/// <summary>
+				/// Модель представлення головного вікна додатка.
+				/// Реалізує різноманітні методи для маніпуляції набором справ.
+				/// Також має властивості, які контролюють зміст представлення.
+				/// </summary>
     public class MainWindowViewModel : Observable
     {
         public ToDoListDbContext DbContext => DbRepository.DbContext;

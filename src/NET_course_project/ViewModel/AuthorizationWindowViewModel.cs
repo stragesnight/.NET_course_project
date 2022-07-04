@@ -6,6 +6,10 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
+				/// <summary>
+				/// Модель представлення вікна авторизації.
+				/// Реалізує метод для безпоередньої авторизації користувача в системі.
+				/// </summary>
     public class AuthorizationWindowViewModel : Observable, IDialog 
     {
         private User _createdUser = null;

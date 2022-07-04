@@ -6,6 +6,10 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
+				/// <summary>
+				/// Модель представлення діалогу створення нової справи.
+				/// Реалізує метод безпосереднього додавання справи до БД.
+				/// </summary>
     public class AddToDoDialogViewModel : Observable, IDialog
     {
         public ToDoListDbContext DbContext => DbRepository.DbContext;

@@ -4,6 +4,10 @@ using NET_course_project.View;
 
 namespace NET_course_project.Misc
 {
+				/// <summary>
+				/// Класс для контрольованого відображення діалогових та звичайних вікон
+				/// з можливістю передачі даних між ними.
+				/// </summary>
     public static class DialogService
     {
         public static void ShowDialog(string dialogName, object state, Action<object> callback = null)

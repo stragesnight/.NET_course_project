@@ -6,6 +6,10 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
+    /// <summary>
+    /// Модель представлення діалогу створення нового проекту.
+    /// Реалізує метод для безпосереднього додавання проекту до БД.
+    /// </summary>
     public class AddProjectDialogViewModel : Observable, IDialog
     {
         private Project _createdProject = null;
