@@ -16,25 +16,27 @@
         </i:Interaction.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="24px"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                     VerticalAlignment="Center">
-            <TextBlock Margin="0px 4px"
+            <TextBlock Style="{StaticResource EditorTextBlock}"
                        Text="Login:"/>
-            <TextBox Text="{Binding Path=CreatedUser.Login, Mode=TwoWay}"/>
-            <TextBlock Margin="0px 4px"
+            <TextBox Style="{StaticResource EditorTextBox}"
+                     Text="{Binding Path=CreatedUser.Login, Mode=TwoWay}"/>
+            <TextBlock Style="{StaticResource EditorTextBlock}"
                        Text="Password:"/>
-            <TextBox Text="{Binding Path=CreatedUser.Password, Mode=TwoWay}"/>
+            <TextBox Style="{StaticResource EditorTextBox}"
+                     Text="{Binding Path=CreatedUser.Password, Mode=TwoWay}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Authorize"

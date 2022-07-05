@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:NET_course_project.View"
              mc:Ignorable="d" 
-             Height="300" Width="500"
+             Height="260" Width="400"
              x:Name="Add_project">
     <Grid Background="White">
         <i:Interaction.Triggers>
@@ -17,21 +17,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="32px"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="24px"/>
+            <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width=".5*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                     VerticalAlignment="Center">
-            <TextBlock Margin="0px 4px"
+            <TextBlock Style="{StaticResource EditorTextBlock}"
                        Text="Enter project name:"/>
-            <TextBox x:Name="projectNameTextBox" Text="{Binding Path=CreatedProject.Title}"/>
+            <TextBox Style="{StaticResource EditorTextBox}"
+                     x:Name="projectNameTextBox" Text="{Binding Path=CreatedProject.Title}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Create project"

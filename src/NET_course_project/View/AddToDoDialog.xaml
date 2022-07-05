@@ -17,29 +17,36 @@
         <Grid.RowDefinitions>
             <RowDefinition Height=".8*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="32px"/>
+            <RowDefinition Height="24px"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
                     VerticalAlignment="Top">
-            <TextBlock Margin="4px 8px" Text="Title:"/>
-            <TextBox x:Name="toDoTitleTextBox" Text="{Binding Path=CreatedToDo.Title}"/>
-            <TextBlock Margin="4px 8px" Text="Description:"/>
-            <TextBox x:Name="toDoDescription" Text="{Binding Path=CreatedToDo.Description}"/>
-            <TextBlock Margin="4px 8px" Text="Priority:"/>
-            <ComboBox x:Name="priorityComboBox"
+            <TextBlock Style="{StaticResource EditorTextBlock}"
+                       Text="Title:"/>
+            <TextBox Style="{StaticResource EditorTextBox}"
+                     Text="{Binding Path=CreatedToDo.Title}"/>
+            <TextBlock Style="{StaticResource EditorTextBlock}"
+                       Text="Description:"/>
+            <TextBox Style="{StaticResource EditorTextBox}"
+                     Text="{Binding Path=CreatedToDo.Description}"/>
+            <TextBlock Style="{StaticResource EditorTextBlock}"
+                       Text="Priority:"/>
+            <ComboBox Style="{StaticResource EditorTextBox}"
                       SelectedItem="{Binding Path=CreatedToDo.Priority, Mode=TwoWay}"
                       SelectedIndex="0"
                       ItemsSource="{Binding Path=DbContext.Priorities.Local}"/>
-            <TextBlock Margin="4px 8px" Text="Due to:"/>
-            <DatePicker x:Name="dueToDatePicker" SelectedDate="{Binding Path=CreatedToDo.DueTo}"/>
+            <TextBlock Style="{StaticResource EditorTextBlock}"
+                       Text="Due to:"/>
+            <DatePicker Style="{StaticResource EditorTextBox}"
+                        SelectedDate="{Binding Path=CreatedToDo.DueTo}"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Create to-do"
