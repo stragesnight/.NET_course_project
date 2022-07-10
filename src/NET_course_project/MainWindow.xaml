@@ -85,18 +85,7 @@
                                                      HorizontalContentAlignment="Stretch">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <StackPanel Margin="4px">
-                                                            <StackPanel.ContextMenu>
-                                                                <ContextMenu>
-                                                                    <MenuItem Header="Delete to-do"
-                                                                      Command="{Binding Source={StaticResource viewModel}, Path=RemoveToDoCommand}"
-                                                                      CommandParameter="{Binding Path=Id}"/>
-                                                                </ContextMenu>
-                                                            </StackPanel.ContextMenu>
-                                                            <TextBlock Style="{StaticResource EditorListViewToDo}"
-                                                                       Text="{Binding Path=Title}"/>
-                                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
-                                                        </StackPanel>
+                                                        <v:ToDoListViewItem/>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>
                                             </ListBox>
@@ -141,18 +130,7 @@
                              ScrollViewer.CanContentScroll="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="4px">
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Delete to-do"
-                                                      Command="{Binding Source={StaticResource viewModel}, Path=RemoveToDoCommand}"
-                                                      CommandParameter="{Binding Path=Id}"/>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <TextBlock Style="{StaticResource EditorListViewToDo}"
-                                               Text="{Binding Path=Title}"/>
-                                    <TextBlock Text="{Binding Path=Priority.Title}"/>
-                                </StackPanel>
+                                <v:ToDoListViewItem/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -281,11 +259,7 @@
                                      SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource EditorListViewToDo}"
-                                                       Text="{Binding Path=Title}"/>
-                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
-                                        </StackPanel>
+                                        <v:ToDoListViewItem/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -300,11 +274,7 @@
                                      SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource EditorListViewToDo}"
-                                                       Text="{Binding Path=Title}"/>
-                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
-                                        </StackPanel>
+                                        <v:ToDoListViewItem/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -320,9 +290,7 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <TextBlock Style="{StaticResource EditorListViewToDo}"
-                                                       Text="{Binding Path=Title}"/>
-                                            <TextBlock Text="{Binding Path=Priority.Title}"/>
+                                            <v:ToDoListViewItem/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
