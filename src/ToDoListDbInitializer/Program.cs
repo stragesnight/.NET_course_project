@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Configuration;
 using ToDoListCommon.Repository;
 using System.Data.SqlClient;
+using ToDoListCommon.Misc;
 
 namespace ToDoListDbInitializer
 {
@@ -71,22 +72,30 @@ namespace ToDoListDbInitializer
 
         private static string GetPassword(string username)
         {
-            bool success;
-            string adminPass;
+            string pass;
 
             do
             {
                 Console.Write($"Enter password for '{username}': ");
-                adminPass = Console.ReadLine();
+                pass = Console.ReadLine();
+                if (!InputValidator.IsValidPassword(pass))
+                {
+                    Console.WriteLine("Password should contain only alphanumerical characters");
+                    continue;
+                }
 
                 Console.Write("Repeat password: ");
-                success = adminPass == Console.ReadLine();
-                if (!success)
+                if (Console.ReadLine() != pass)
+                {
                     Console.WriteLine("Passwords should match!\n");
+                    continue;
+                }
 
-            } while (!success);
+                break;
 
-            return adminPass;
+            } while (true);
+
+            return pass;
         }
 
         private static void CreateUsers(ToDoListDbContext context, string adminName, string adminPass, string workerName, string workerPass)

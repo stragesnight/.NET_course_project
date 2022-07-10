@@ -67,6 +67,14 @@ namespace NET_course_project.ViewModel
         {
             IsNotBusy = false;
 
+            if (!InputValidator.IsValidUsername(CreatedUser.Login)
+                || !InputValidator.IsValidPassword(CreatedUser.Password))
+            {
+                MessageBox.Show("Invalid username and/or password");
+                IsNotBusy = true;
+                return;
+            }
+
             if (DbRepository.Initialize(CreatedUser))
             {
                 Application.Current.Dispatcher.Invoke(new Action(() => {

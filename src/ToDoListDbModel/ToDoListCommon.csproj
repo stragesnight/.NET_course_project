@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Misc\FilterTask.cs" />
+    <Compile Include="Misc\InputValidator.cs" />
     <Compile Include="Misc\Observable.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
     <Compile Include="Misc\User.cs" />
