@@ -295,8 +295,8 @@
                 <ListBoxItem>
                     <Border Style="{StaticResource EditorBorder}">
                         <StackPanel Margin="4px">
-                            <TextBlock Text="Due in 3 days:" FontSize="12px"/>
-                            <ListBox ItemsSource="{Binding Path=Ongoing3DayToDos}"
+                            <TextBlock Text="Due in a week:" FontSize="12px"/>
+                            <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}"
                                      SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -314,8 +314,8 @@
                 <ListBoxItem>
                     <Border Style="{StaticResource EditorBorder}">
                         <StackPanel Margin="4px">
-                            <TextBlock Text="Due in a week:" FontSize="12px"/>
-                            <ListBox ItemsSource="{Binding Path=Ongoing7DayToDos}"
+                            <TextBlock Text="Due in a month:" FontSize="12px"/>
+                            <ListBox ItemsSource="{Binding Path=Ongoing30DayToDos}"
                                      SelectedValue="{Binding Path=SelectedToDo, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>

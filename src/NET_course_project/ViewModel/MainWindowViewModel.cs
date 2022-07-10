@@ -10,11 +10,11 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
-				/// <summary>
-				/// Модель представлення головного вікна додатка.
-				/// Реалізує різноманітні методи для маніпуляції набором справ.
-				/// Також має властивості, які контролюють зміст представлення.
-				/// </summary>
+	/// <summary>
+	/// Модель представлення головного вікна додатка.
+	/// Реалізує різноманітні методи для маніпуляції набором справ.
+	/// Також має властивості, які контролюють зміст представлення.
+	/// </summary>
     public class MainWindowViewModel : Observable
     {
         public ToDoListDbContext DbContext => DbRepository.DbContext;
@@ -135,17 +135,6 @@ namespace NET_course_project.ViewModel
             }
         }
 
-        private List<ToDo> _ongoing3DayToDos = null;
-        public List<ToDo> Ongoing3DayToDos
-        {
-            get => _ongoing3DayToDos;
-            set
-            {
-                _ongoing3DayToDos = value;
-                OnPropertyChanged("Ongoing3DayToDos");
-            }
-        }
-
         private List<ToDo> _ongoing7DayToDos = null;
         public List<ToDo> Ongoing7DayToDos
         {
@@ -154,6 +143,17 @@ namespace NET_course_project.ViewModel
             {
                 _ongoing7DayToDos = value;
                 OnPropertyChanged("Ongoing7DayToDos");
+            }
+        }
+
+        private List<ToDo> _ongoing30DayToDos = null;
+        public List<ToDo> Ongoing30DayToDos
+        {
+            get => _ongoing30DayToDos;
+            set
+            {
+                _ongoing30DayToDos = value;
+                OnPropertyChanged("Ongoing30DayToDos");
             }
         }
 
@@ -307,15 +307,15 @@ namespace NET_course_project.ViewModel
                 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) >= 0
                 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 1).ToList();
 
-            Ongoing3DayToDos = DbRepository.DbContext.ToDos.Where(x =>
-                !x.Completed
-                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 1
-                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 3).ToList();
-
             Ongoing7DayToDos = DbRepository.DbContext.ToDos.Where(x =>
                 !x.Completed
-                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 3
+                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 1
                 && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 7).ToList();
+
+            Ongoing30DayToDos = DbRepository.DbContext.ToDos.Where(x =>
+                !x.Completed
+                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) > 7
+                && DbFunctions.DiffDays(DateTime.Now, x.DueTo) <= 30).ToList();
         }
 
         private void RefilterToDos()
