@@ -7,11 +7,11 @@ using ToDoListCommon.Repository;
 
 namespace NET_course_project.ViewModel
 {
-				/// <summary>
-				/// Модель представлення діалогу додавання нового тегу до справи.
-				/// Реалізує метод для безпосереднього додавання тегу до справи.
-				// Якщо вказана справа відсутня в БД - додає її.
-				/// </summary>
+    /// <summary>
+    /// Модель представлення діалогу додавання нового тегу до справи.
+    /// Реалізує метод для безпосереднього додавання тегу до справи.
+    /// Якщо вказана справа відсутня в БД - додає її.
+    /// </summary>
     public class AddTagDialogViewModel : Observable, IDialog
     {
         private Tag _createdTag = null;

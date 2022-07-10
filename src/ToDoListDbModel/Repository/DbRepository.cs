@@ -7,11 +7,11 @@ using ToDoListCommon.Model;
 
 namespace ToDoListCommon.Repository
 {
-				/// <summary>
-				/// Репозиторій для бази даних. Реалізує методи швидкого доступу (інтерфейс) до БД
-				/// з використанням ToDoListDbContext.
-				/// Такод має механізм сповіщення про зміну стану БД за допомогою події.
-				/// </summary>
+    /// <summary>
+    /// Репозиторій для бази даних. Реалізує методи швидкого доступу (інтерфейс) до БД
+    /// з використанням ToDoListDbContext.
+    /// Такод має механізм сповіщення про зміну стану БД за допомогою події.
+    /// </summary>
     public static class DbRepository
     {
         public static event Action ChangesSaved;

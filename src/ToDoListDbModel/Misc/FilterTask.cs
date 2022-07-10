@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace NET_course_project.Misc
 {
-				/// <summary>
-				/// Абстракція для фільтру даних. Має метод для фільтрування певного набору даних
-				/// за допомогою вказаного предиката.
-				/// </summary>
+    /// <summary>
+    /// Абстракція для фільтру даних. Має метод для фільтрування певного набору даних
+    /// за допомогою вказаного предиката.
+    /// </summary>
     public class FilterTask<T>
     {
         public string Title { get; set; }
