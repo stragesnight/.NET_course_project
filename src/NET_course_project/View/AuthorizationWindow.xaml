@@ -35,8 +35,9 @@
                      Text="{Binding Path=CreatedUser.Login, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource EditorTextBlock}"
                        Text="Password:"/>
-            <TextBox Style="{StaticResource EditorTextBox}"
-                     Text="{Binding Path=CreatedUser.Password, Mode=TwoWay}"/>
+            <PasswordBox Style="{StaticResource EditorTextBox}"
+                         x:Name="passwordBox"
+                         PasswordChanged="HandlePasswordChange"/>
         </StackPanel>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="Authorize"

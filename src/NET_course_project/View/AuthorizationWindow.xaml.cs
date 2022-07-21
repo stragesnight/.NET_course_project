@@ -17,5 +17,10 @@ namespace NET_course_project.View
 
         public void CloseWindow(object sender, RoutedEventArgs e)
             => this.Close();
+
+        private void HandlePasswordChange(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as AuthorizationWindowViewModel).CreatedUser.Password = passwordBox.Password;
+        }
     }
 }
