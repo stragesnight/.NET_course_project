@@ -7,8 +7,21 @@
         mc:Ignorable="d"
         Title="About" Height="300" Width="500">
     <Grid>
-        <TextBlock VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Text="placeholder"/>
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="16px"
+                       FontWeight="Bold"
+                       Margin="16px"
+                       Text="TO-DO LIST"/>
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="8px"
+                       Text="A program to organize and manage your projects"/>
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="8px"
+                       Text="Created as an implementation of course project"/>
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="8px"
+                       Text="by Shelest Olexandr"/>
+        </StackPanel>
     </Grid>
 </Window>
