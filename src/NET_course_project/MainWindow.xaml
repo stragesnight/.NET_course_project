@@ -37,6 +37,7 @@
               IsMainMenu="True" VerticalAlignment="Top">
             <MenuItem Header="Projects">
                 <MenuItem Header="Add new project..."
+                          IsEnabled="{Binding Path=IsUserPriviliged}"
                           Command="{Binding Path=AddProjectCommand}"/>
             </MenuItem>
             <MenuItem Header="Help"
